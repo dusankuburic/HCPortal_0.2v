@@ -4,12 +4,12 @@ header("Content-Type: application/json; charset=UTF-8");
 
 
 
-if(isset($_POST['moderator'])){
+if(isset($_POST['moder'])){
 
-    $moderator = new Moderator();
-    $rezultat = $moderator->dodaj_moderatora($_POST['moderator']);
 
-    echo $rezultat;
+    $moderator = new Moderator();                   
+    $rezultat = $moderator->dodaj_moderatora($_POST['moder']);
+   
 
     if($rezultat){
         echo "greska";
@@ -17,6 +17,7 @@ if(isset($_POST['moderator'])){
        echo "radi";
     }
     
+
 }
 
 

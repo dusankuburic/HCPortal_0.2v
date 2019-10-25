@@ -65,43 +65,48 @@ class Moderator extends Database {
 
 
     public function dodaj_moderatora($podaci_korisnika){
-
+        
         $rezultat_upita = [];
         $moderator_postoji = true;
-
+        
         $moderator = json_decode($podaci_korisnika, false);
+        
+        $this->ime = $moderator->ime;
+        $this->prezime = $moderator->prezime;
+        $this->korisnicko_ime = $moderator->korisnicko_ime;
+        $this->sifra = password_hash($moderator->sifra, PASSWORD_DEFAULT);
 
-        $this->ime = $podaci_korisnika->ime;
-        $this->prezime = $podaci_korisnika->prezime;
-        $this->korisnicko_ime = $podaci_korisnika->korisnicko_ime;
-        $this->sifra = password_hash($podaci_korisnika->sifra, PASSWORD_DEFAULT);
-
-
-        $upit = $this->set_query("SELECT * FROM moderator WHERE korisnicko_ime = '{$this->korisnicko_ime}'");
+        $upit = $this->set_query("SELECT * FROM moderator
+                WHERE korisnicko_ime = '{$this->korisnicko_ime}'");
 
         while($red = $upit->fetch_assoc()){
             $rezultat_upita = $red;
         }
 
+
         if(empty($rezultat_upita)){
 
-            $upit = $this->prepare_query("INSERT INTO moderator(
-                ime,
-                prezime,
-                korisnicko_ime,
-                sifra)
-                VALUES(?, ?, ?, ?)");
+        $upit = $this->prepare_query("INSERT INTO moderator(
+            ime,
+            prezime,
+            korisnicko_ime,
+            sifra)
+            VALUES(?, ?, ?, ?)");
 
-            $upit->bind_param("ssss",
-                $this->ime,
-                $this->prezime,
-                $this->korisnicko_ime,
-                $this->sifra);
+        $upit->bind_param("ssss",
+            $this->ime,
+            $this->prezime,
+            $this->korisnicko_ime,
+            $this->sifra);
 
-            $upit->execute();
+        $upit->execute();
+
+        $moderator_postoji = false;
         }
+        
 
-        return $rezultat_upita;
+        return $moderator_postoji;
+     
     }
 
 

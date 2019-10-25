@@ -9,7 +9,7 @@
         <br>
             <div class="row justify-content-center">
                 <div class="col-lg-5 forma">
-                    <form method="POST" onsubmit="return validacija()">
+                    <form method="POST" onsubmit="return dodaj_moderatora()">
                         <div class="form-group">
                             <h4>Ime</h4>
                             <input type="text" id="ime" class="form-control">

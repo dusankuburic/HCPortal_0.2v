@@ -1,13 +1,8 @@
 
-function validacija(){
+function validacija(ime,prezime,korisnicko_ime,sifra, sifra_pot){
 
     var rezultat = true;
 
-    var ime = document.getElementById("ime").value;
-    var prezime = document.getElementById("prezime").value;
-    var korisnicko_ime = document.getElementById("kor_ime").value;
-    var sifra = document.getElementById("sifra").value;
-    var sifra_pot = document.getElementById("sifra_pot").value;
 
     if(ime === '' ||  ime === null){
         alert('Unesite ime');
@@ -33,11 +28,7 @@ function validacija(){
         rezultat =  false;
     }
 
-    if(rezultat){
-        dodaj_moderatora(ime, prezime, korisnicko_ime, sifra);
-    }
-
-    return rezultat;
+   return rezultat;
 
 
 }
@@ -46,8 +37,19 @@ function validacija(){
 
 
 
+function dodaj_moderatora(){
 
-function dodaj_moderatora(ime, prezime, korisnicko_ime, sifra){
+    var ime = document.getElementById("ime").value;
+    var prezime = document.getElementById("prezime").value;
+    var korisnicko_ime = document.getElementById("kor_ime").value;
+    var sifra = document.getElementById("sifra").value;
+    var sifra_pot = document.getElementById("sifra_pot").value;
+
+
+    var rez = validacija(ime, prezime, korisnicko_ime, sifra, sifra_pot);
+
+    if(rez == true){
+
 
    var moderator = {
        "ime":ime,
@@ -75,10 +77,15 @@ function dodaj_moderatora(ime, prezime, korisnicko_ime, sifra){
 };
 
 
-
    
    xmlhttp.open("POST","../../../app/responders/moderator/dodaj_moderatora.php", true);
    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-   xmlhttp.send("moderator="+moderator_json);
+   xmlhttp.send("moder="+moderator_json);
+
+} 
+
+
+return false;
+
     
 }
