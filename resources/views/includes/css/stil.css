@@ -1,0 +1,77 @@
+
+
+.forma {
+background-color: #FEE140;
+background-image: linear-gradient(90deg, #FEE140 0%, #FA709A 100%);
+border-radius: 6%;
+}
+
+
+
+body {
+  background-color:  #3EECAC;
+}
+
+h1 {
+    color: #17202A;
+}
+
+thead {
+    color: #17202A
+}
+
+td {
+    background-color:  #F2F4F4;
+    font-size: 17px;
+    font-weight: 500;
+    color: #17202A;
+}
+
+
+
+
+input::placeholder {
+
+    font-size: 20px;
+    font-weight: 500;
+    color:#21618C !important; 
+}
+
+
+#kat {
+    font-size: 20px;
+    font-weight: 500;
+    color:#21618C !important; 
+}
+
+
+
+
+
+
+
+/* textarea boja slova*/
+textarea::-webkit-input-placeholder {
+    font-size: 20px;
+    font-weight: 500;
+    color:#21618C !important; 
+  }
+  
+  
+  textarea::-moz-placeholder { 
+    font-size: 20px;
+    font-weight: 500;
+    color:#21618C !important; 
+  }
+  
+  textarea:-ms-input-placeholder {
+    font-size: 20px;
+    font-weight: 500;
+    color:#21618C !important;
+  }
+  
+  textarea::placeholder {
+    font-size: 20px;
+    font-weight: 500;
+    color:#21618C !important; 
+  }

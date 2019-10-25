@@ -1,0 +1,75 @@
+body {
+    padding-top: 55px;
+  }
+
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+
+.kat {
+    background-color: #9B59B6;
+    color: #FDFEFE;
+    font-size: 18px; 
+    font-weight: 500;
+}
+
+a.kat:hover {
+    color: #9B59B6;
+    background-color: #FDFEFE;
+   
+}
+
+button.kat:hover {
+
+    color: #9B59B6;
+    background-color: #E4EBF0;
+}
+
+.pom {
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.blok1 {
+    background-color: #48C9B0;
+}
+
+.blok2 {
+    background-color:  #34495E;
+}
+
+
+.set {
+    background-color: #BCDAF0;
+}
+
+.reklamacija {
+    background-color: #CB4335;
+}
+
+.page {
+    background-color:#AFC0DD;  
+}
+
+.main {
+    background-color: #FFFFFF;
+}
+
+
+.pro {
+    background-color:#48C9B0;
+}
+
+.kartica {
+    background-color: #2E86C1; 
+    padding:2%; 
+}
+
+
+

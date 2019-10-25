@@ -3,13 +3,29 @@ require_once("Database.php");
 
 class Ucenik extends Database {
 
-    private $id;
+    private $sifra_ucenika;
 
-    public $username;
+    private $ime;
 
-    public $password;
+    private $prezime;
 
-    private $name;
+    public $korisnicko_ime;
+
+    private $sifra;
+
+    private $datum_rodjenja;
+
+    private $mesto_stanovanja;
+
+    private $jmbg;
+
+    private $pol;
+
+    private $ime_staratelja;
+
+    private $prezime_staratelja;
+
+    private $kontakt_telefon;
 
 
 

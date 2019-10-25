@@ -43,7 +43,6 @@ class Moderator extends Database {
         $stanje_prijave = false;
         $rezultat_upita = [];
 
-
         $upit = $this->set_query("SELECT * FROM moderator WHERE korisnicko_ime = '{$this->korisnicko_ime}'");
 
         while($red = $upit->fetch_assoc()){
@@ -55,7 +54,6 @@ class Moderator extends Database {
 
             $tek_korisnicko_ime = $rezultat_upita['korisnicko_ime'];
             $tek_sifra = $rezultat_upita['sifra'];
-
 
             if($tek_korisnicko_ime === $this->korisnicko_ime && $tek_sifra === $this->sifra){
                 $stanje_prijave = true;

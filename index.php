@@ -1,38 +1,75 @@
-<?php require_once("resources/views/includes/head.php"); ?>
 
-<div class="row justify-content-center"> 
-    <div class="col-lg-4">
+<?php session_start(); ?>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <h2>Pocetna</h2>
-      <!--   <a class="btn btn-danger" href="resources/views/layouts/student.php?route=svi_predmeti">Studenti</a> -->
-        <br><br>
-        <a class="btn btn-success"  href="resources/views/layouts/pages.php?route=prijava_ucenik">Ucenik login</a>
-        <br><br>
-        <a class="btn btn-primary"  href="resources/views/layouts/pages.php?route=prijava_profesor">Profesor login</a>
-        <br><br>
-        <a class="btn btn-info"  href="resources/views/layouts/pages.php?route=prijava_moderator">Moderator login</a>
-        <br><br>
+    <!-- Bootstrap CSS -->
+    <link href="resources/views/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="resources/views/includes/css/sidebar.css" rel="stylesheet">
+    <link href="resources/views/includes/css/stil.css" rel="stylesheet">
+    <link href="resources/views/includes/css/all.css" rel="stylesheet">
+  
+    <title>Hello, world!</title>
+  </head>
 
-        <?php
-            if(isset($_SESSION['ucenik'])){
-               echo "<a href='resources/views/layouts/ucenik.php'>Profil</a>";
-            }
+<body>
 
-            if(isset($_SESSION['profesor'])){
-                echo "<a href='resources/views/layouts/profesor.php'>Profil</a>";
-            }
+    <div class="row justify-content-center"> 
+        <div class="col-lg-4">
 
-            if(isset($_SESSION['moderator'])){
-                echo "<a href='resources/views/layouts/moderator.php'>Profil</a>";
-            }
-        ?>
+            <h2>Pocetna</h2>
+        <!--   <a class="btn btn-danger" href="resources/views/layouts/student.php?route=svi_predmeti">Studenti</a> -->
+            <br><br>
+            <a class="btn btn-success"  href="resources/views/layouts/pages.php?route=prijava_ucenik">Ucenik login</a>
 
+            <br><br>
+            <a class="btn btn-primary"  href="resources/views/layouts/pages.php?route=prijava_profesor">Profesor login</a>
+            <br><br>
+            <a class="btn btn-info"  href="resources/views/layouts/pages.php?route=prijava_moderator">Moderator login</a>
+            <br><br>
+
+            <?php
+                if(isset($_SESSION['ucenik'])){
+                echo "<a href='resources/views/layouts/ucenik.php'>Profil</a>";
+                }
+
+                if(isset($_SESSION['profesor'])){
+                    echo "<a href='resources/views/layouts/profesor.php'>Profil</a>";
+                }
+
+                if(isset($_SESSION['moderator'])){
+                    echo "<a href='resources/views/layouts/moderator.php'>Profil</a>";
+                }
+            ?>
+
+        </div>
     </div>
-</div>
 
 
 
-<?php require_once("resources/views/includes/footer.php"); ?>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="resources/views/bootstrap/jquery-3.3.1.slim.min.js"></script>
+        <script src="resources/views/bootstrap/popper.min.js" ></script>
+        <script src="resources/views/bootstrap/js/bootstrap.min.js"></script>
+
+
+
+        <!-- open menu  on resize-->
+        <script>
+            $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+            });
+        </script>
+    </body>
+
+</html>
 
 
 
