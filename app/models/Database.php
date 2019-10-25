@@ -1,7 +1,7 @@
 <?php 
 
 require_once("IConnection.php"); 
-require_once("../config/config.php"); 
+require_once("../../config/config.php"); 
 
 
 abstract class Database implements IConnection {

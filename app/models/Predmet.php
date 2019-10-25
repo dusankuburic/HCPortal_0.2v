@@ -20,33 +20,56 @@ class Predmet extends Database {
     }
 
 
+
+
+
+    public function dodaj_predmet($podaci_korisnika){
+
+        $rezultat_upita = [];
+        $predmet_postoji = true;
+
+        $predmet = json_decode($podaci_korisnika, false);
+
+        $this->naziv = $predmet->naziv;
+
+        $upit = $this->set_query("SELECT * FROM predmet 
+                WHERE naziv = '{$this->naziv}'");
+
+        while($red = $upit->fetch_assoc()){
+            $rezultat_upita = $red;
+        }
+
+        if(empty($rezultat_upita)){
+
+    
+            $upit = $this->prepare_query("INSERT INTO predmet(naziv)
+                    VALUES(?)");
+    
+            $upit->bind_param("s", $this->naziv);
+
+            $upit->execute();
+
+            $predmet_postoji = false;
+        }
+            
+        
+
+        return $predmet_postoji;
+
+    }
+
     public function svi_predmeti(){
 
-        $arr = [];
 
-        //$query = $this->set_query("SELECT * FROM predmeti");
+        $rezultat_upita = [];
 
-        $query = "SELECT * FROM predmet";
-
-        $result = mysqli_query($this->get_connection(), $query);
-
-        if(!$result) {
-            die("cannot fetch data".mysqli_error($this->get_connection()));
+        $upit =  $this->set_query("SELECT * FROM predmet");
+        
+        while($red = $upit->fetch_assoc()){
+            $rezultat_upita[] = $red;
         }
 
-        /*
-        while($row = $query->fetch_assoc()){
-            $result[] = $row;
-        }*/
-
-
-        $rows = mysqli_num_rows($result);
-
-        for($i = 0; $i < $rows; $i++){
-            $arr[] = mysqli_fetch_assoc($result);
-        }
-
-        return $arr;
+        return $rezultat_upita;
     }
 
 

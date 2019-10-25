@@ -32,7 +32,7 @@ function login_user(){
     };
     
 
-    xmlhttp.open("POST","../../../app/responders/prijava_profesor.php", true);
+    xmlhttp.open("POST","../../../app/responders/prijava/prijava_profesor.php", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send("user="+user_obj_json);
 }

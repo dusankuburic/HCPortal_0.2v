@@ -26,6 +26,24 @@ if(isset($_SESSION['moderator'])){
         break;
 
 
+        case 'pregled_predmeta': 
+        require_once('../moderator/predmeti/pregled_predmeta.php');
+        break;
+
+        case 'dodaj_predmet': 
+        require_once('../moderator/predmeti/dodaj_predmet.php');
+        break;
+
+
+        case 'pregled_moderatora': 
+        require_once('../moderator/moderatori/pregled_moderatora.php');
+        break;
+
+        case 'dodaj_moderatora': 
+        require_once('../moderator/moderatori/dodaj_moderatora.php');
+        break;
+
+
         default:
         require_once('../moderator/index.php');
         break;
