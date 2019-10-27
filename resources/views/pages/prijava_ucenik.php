@@ -1,19 +1,26 @@
 
-
-<div class="row justify-content-center"> 
-    <div class="col-lg-4 col-4">
-    <h2>Ucenik Login</h2>
-        <form method="post">
-            <div class="form-group">
-                <label>Korisnicko ime</label>
-                <input type="text" class="form-control" id="username">
-            </div>
-            <div class="form-group">
-                <label>Sifra</label>
-                <input type="text" class="form-control" id="password">
-            </div>
-            <input type="submit" class="btn btn-primary"  onclick="login_user()" id="login" value="Login">
-        </form>
+<div class="container signin-container">
+    <div class="row">
+      <div class="col"></div>
+      <div class="col-sm-12 col-md-8">
+        <div class="card signin-card">
+          <div class="card-block">
+            <img src="../../assets/ucenik.png" class="img img-fluid signin-img" width="50%">
+            <h4 class="text-center">Učenik</h4>
+            <form class="sigin-form">
+              <div class="form-group">
+                <input type="text" class="form-control" id="username" placeholder="Korisnicko ime">
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control" id="password" placeholder="Sifra">
+              </div>
+              <button type="button" class="btn signin-btn-ucenik btn-lg" id="login" onclick="login_user()">Prijavi se</button>
+            </form>
+          </div>
+        </div>
+  
+      </div>
+      <div class="col"></div>
     </div>
 
 

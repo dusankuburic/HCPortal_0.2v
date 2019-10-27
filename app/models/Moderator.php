@@ -55,7 +55,7 @@ class Moderator extends Database {
             $tek_korisnicko_ime = $rezultat_upita['korisnicko_ime'];
             $tek_sifra = $rezultat_upita['sifra'];
 
-            if($tek_korisnicko_ime === $this->korisnicko_ime && $tek_sifra === $this->sifra){
+            if($tek_korisnicko_ime === $this->korisnicko_ime && password_verify($this->sifra,$tek_sifra)){
                 $stanje_prijave = true;
             }
         }
@@ -86,27 +86,40 @@ class Moderator extends Database {
 
         if(empty($rezultat_upita)){
 
-        $upit = $this->prepare_query("INSERT INTO moderator(
-            ime,
-            prezime,
-            korisnicko_ime,
-            sifra)
-            VALUES(?, ?, ?, ?)");
+            $upit = $this->prepare_query("INSERT INTO moderator(
+                ime,
+                prezime,
+                korisnicko_ime,
+                sifra)
+                VALUES(?, ?, ?, ?)");
 
-        $upit->bind_param("ssss",
-            $this->ime,
-            $this->prezime,
-            $this->korisnicko_ime,
-            $this->sifra);
+            $upit->bind_param("ssss",
+                $this->ime,
+                $this->prezime,
+                $this->korisnicko_ime,
+                $this->sifra);
 
-        $upit->execute();
+            $upit->execute();
 
-        $moderator_postoji = false;
+            $moderator_postoji = false;
         }
-        
-
-        return $moderator_postoji;
+            
+            return $moderator_postoji;
      
+    }
+
+
+    public function svi_moderatori(){
+        
+        $rezultat_upita = [];
+
+        $upit =  $this->set_query("SELECT * FROM moderator");
+        
+        while($red = $upit->fetch_assoc()){
+            $rezultat_upita[] = $red;
+        }
+
+        return $rezultat_upita;
     }
 
 

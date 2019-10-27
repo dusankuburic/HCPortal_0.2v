@@ -11,6 +11,7 @@
     <link href="../includes/css/sidebar.css" rel="stylesheet">
     <link href="../includes/css/stil.css" rel="stylesheet">
     <link href="../includes/css/all.css" rel="stylesheet">
+    <link href="../includes/css/login.css" rel="stylesheet">
   
     <title>Hello, world!</title>
   </head>

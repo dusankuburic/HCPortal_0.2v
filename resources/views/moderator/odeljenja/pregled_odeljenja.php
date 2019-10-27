@@ -8,7 +8,7 @@
        
             <div class="row justify-content-center">
 
-            <div class="col-lg-7" >
+            <div class="col-lg-7 " >
                 <table class="table table-hover text-center">
                       <thead>
                         <tr>

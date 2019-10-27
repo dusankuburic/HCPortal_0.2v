@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once("../models/Profesor.php");
+require_once("../../models/Profesor.php");
 header("Content-Type: application/json; charset=UTF-8");
 
 

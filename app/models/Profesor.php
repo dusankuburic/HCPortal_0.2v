@@ -65,7 +65,7 @@ class Profesor extends Database {
             $tek_sifra = $rezultat_upita['sifra'];
 
 
-            if($tek_korisnicko_ime === $this->korisnicko_ime && $tek_sifra === $this->sifra){
+            if($tek_korisnicko_ime === $this->korisnicko_ime && password_verify($this->sifra,$tek_sifra)){
                 $stanje_prijave = true;
             }
         }
@@ -74,6 +74,67 @@ class Profesor extends Database {
     }
 
 
+    public function dodaj_profesora($podaci_korisnika){
+
+        $rezultat_upita = [];
+        $profesor_postoji = true;
+
+        $profesor = json_decode($podaci_korisnika, false);
+
+        $this->ime = $profesor->ime;
+        $this->prezime = $profesor->prezime;
+        $this->mesto_stanovanja = $profesor->mesto_stanovanja;
+        $this->jmbg = $profesor->jmbg;
+        $this->korisnicko_ime = $profesor->korisnicko_ime;
+        $this->sifra = password_hash($profesor->sifra, PASSWORD_DEFAULT);
+
+        $upit = $this->set_query("SELECT * FROM profesor
+                WHERE korisnicko_ime = '{$this->korisnicko_ime}'");
+
+        while($red = $upit->fetch_assoc()){
+            $rezultat_upita = $red;
+        }
+
+        if(empty($rezultat_upita)){
+
+            $upit = $this->prepare_query("INSERT INTO profesor(
+                ime,
+                prezime,
+                mesto_stanovanja,
+                jmbg,
+                korisnicko_ime,
+                sifra)
+                VALUE(?, ?, ?, ?, ?, ?)");
+
+            $upit->bind_param("ssssss",
+                $this->ime,
+                $this->prezime,
+                $this->mesto_stanovanja,
+                $this->jmbg,
+                $this->korisnicko_ime,
+                $this->sifra);
+
+            $upit->execute();
+
+            $profesor_postoji = false;
+        }
+
+        return $profesor_postoji;
+    }
+
+
+    public function svi_profesori(){
+        
+        $rezultat_upita = [];
+
+        $upit =  $this->set_query("SELECT * FROM profesor");
+        
+        while($red = $upit->fetch_assoc()){
+            $rezultat_upita[] = $red;
+        }
+
+        return $rezultat_upita;
+    }
 
 
 }

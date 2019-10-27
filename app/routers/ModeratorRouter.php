@@ -25,7 +25,6 @@ if(isset($_SESSION['moderator'])){
         require_once('../moderator/odeljenja/dodaj_odeljenje.php');
         break;
 
-
         case 'pregled_predmeta': 
         require_once('../moderator/predmeti/pregled_predmeta.php');
         break;
@@ -34,13 +33,28 @@ if(isset($_SESSION['moderator'])){
         require_once('../moderator/predmeti/dodaj_predmet.php');
         break;
 
-
         case 'pregled_moderatora': 
         require_once('../moderator/moderatori/pregled_moderatora.php');
         break;
 
         case 'dodaj_moderatora': 
         require_once('../moderator/moderatori/dodaj_moderatora.php');
+        break;
+
+        case 'pregled_profesora': 
+        require_once('../moderator/profesori/pregled_profesora.php');
+        break;
+
+        case 'dodaj_profesora': 
+        require_once('../moderator/profesori/dodaj_profesora.php');
+        break;
+
+        case 'pregled_ucenika': 
+        require_once('../moderator/ucenici/pregled_ucenika.php');
+        break;
+
+        case 'dodaj_ucenika': 
+        require_once('../moderator/ucenici/dodaj_ucenika.php');
         break;
 
 

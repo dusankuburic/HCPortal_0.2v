@@ -1,3 +1,4 @@
+<?php if(!isset($_SESSION['moderator'])){  header("Location: ../../../index.php");} ?>
 
     <?php require_once("../includes/sidebar.php"); ?>
     

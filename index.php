@@ -9,10 +9,7 @@
 
     <!-- Bootstrap CSS -->
     <link href="resources/views/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="resources/views/includes/css/sidebar.css" rel="stylesheet">
-    <link href="resources/views/includes/css/stil.css" rel="stylesheet">
     <link href="resources/views/includes/css/all.css" rel="stylesheet">
-  
     <title>Hello, world!</title>
   </head>
 
@@ -22,7 +19,6 @@
         <div class="col-lg-4">
 
             <h2>Pocetna</h2>
-        <!--   <a class="btn btn-danger" href="resources/views/layouts/student.php?route=svi_predmeti">Studenti</a> -->
             <br><br>
             <a class="btn btn-success"  href="resources/views/layouts/pages.php?route=prijava_ucenik">Ucenik login</a>
 
@@ -50,6 +46,7 @@
     </div>
 
 
+ 
 
 
         <!-- Optional JavaScript -->

@@ -1,4 +1,4 @@
-
+<?php if(!isset($_SESSION['profesor'])){  header("Location: ../../../index.php");} ?>
 <?php require_once("../includes/sidebar.php"); ?>
     
     <div id="page-content-wrapper">
