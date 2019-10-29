@@ -25,6 +25,8 @@ class Ucenik extends Database {
 
     private $prezime_staratelja;
 
+    private $sifra_odeljenja;
+
     private $kontakt_telefon;
 
 
@@ -93,11 +95,12 @@ class Ucenik extends Database {
         $this->ime_staratelja = $ucenik->ime_staratelja;
         $this->prezime_staratelja = $ucenik->prezime_staratelja;
         $this->kontakt_telefon = $ucenik->kontakt_telefon;
+        $this->sifra_odeljenja = $ucenik->sifra_odeljenja;
         $this->korisnicko_ime = $ucenik->korisnicko_ime;
         $this->sifra = password_hash($ucenik->sifra, PASSWORD_DEFAULT);
         //DATUM RODJENJA
         //POL
-        //SIFRA ODELJENJA
+
 
         $upit = $this->set_query("SELECT * FROM ucenik
                 WHERE korisnicko_ime = '{$this->korisnicko_ime}'");
@@ -107,7 +110,7 @@ class Ucenik extends Database {
         }
 
 
-        if(empty($rezultat_upita)){
+        if(!$rezultat_upita){
 
             $upit = $this->prepare_query("INSERT INTO ucenik(
                 ime,
@@ -118,10 +121,11 @@ class Ucenik extends Database {
                 jmbg,
                 ime_staratelja,
                 prezime_staratelja,
-                kontakt_telefon)
-                VALUE(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                kontakt_telefon,
+                sifra_odeljenja)
+                VALUE(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-            $upit->bind_param("sssssssss",
+            $upit->bind_param("ssssssssss",
                 $this->ime,
                 $this->prezime,
                 $this->korisnicko_ime,
@@ -130,7 +134,8 @@ class Ucenik extends Database {
                 $this->jmbg,
                 $this->ime_staratelja,
                 $this->prezime_staratelja,
-                $this->kontakt_telefon);
+                $this->kontakt_telefon,
+                $this->sifra_odeljenja);
 
             $upit->execute();
 

@@ -21,11 +21,47 @@ class Odeljenje extends Database {
     public function dodaj_odeljenje($podaci_korisnika){
 
         $rezultat_upita = [];
-        $odeljenje_postoji = true;
+        $poruka = "";
 
         $odeljenje = json_decode($podaci_korisnika, false);
-
         $this->naziv =  $odeljenje->naziv;
+
+
+        $upit = "SELECT * FROM odeljenje WHERE naziv = '{$this->naziv}'";
+        $result = mysqli_query($this->connection, $upit);
+   
+
+        $redovi = mysqli_num_rows($result);
+        for($i = 0; $i < $redovi; $i++){
+            $rezultat_upita[] = mysqli_fetch_assoc($result);
+        }
+
+
+        if(!$rezultat_upita){
+
+            $upit = $this->prepare_query("INSERT INTO odeljenje(naziv)
+            VALUES(?)");
+
+            $upit->bind_param("s", $this->naziv);
+
+            $upit->execute();
+
+            $poruka = "Uspesno dodato odeljenje";
+        } else {
+            $poruka = "Vec postoji odljenje";
+        }
+
+        return $poruka;
+    }
+
+
+
+    public function izmeni_odeljenje($podaci_korisnika){
+
+        $odeljenje = json_decode($podaci_korisnika, false);
+        $this->sifra_odeljenja = $odeljenje->sifra;
+        $this->naziv = $odeljenje->naziv;
+
 
         $upit = $this->set_query("SELECT * FROM odeljenje 
                 WHERE naziv = '{$this->naziv}'");
@@ -34,19 +70,23 @@ class Odeljenje extends Database {
             $rezultat_upita = $red;
         }
 
-        if(empty($rezultat_upita)){
+        if(!$rezultat_upita){
 
-            $upit = $this->prepare_query("INSERT INTO odeljenje(naziv)
-                    VALUES (?)");
-
+            $upit = $this->prepare_query("UPDATE odeljenje SET
+                    naziv = (?)
+                    WHERE sifra_odeljenja = {$this->sifra_odeljenja}");
+            
             $upit->bind_param("s", $this->naziv);
 
             $upit->execute();
 
-            $odeljenje_postoji = false;
+            $poruka = "Uspesno izmenjeno odeljenje";
+
+        } else {
+            $poruka = "Vec postoji odeljenje sa tim imenom";
         }
 
-        return $odeljenje_postoji;
+        return $poruka;
     }
 
 
@@ -61,6 +101,32 @@ class Odeljenje extends Database {
         }
 
         return $rezultat_upita;
+    }
+
+    public function sa_sifrom($podaci_korisnika){
+
+        $odeljenje = json_decode($podaci_korisnika, false);
+        $podaci = [];
+       
+        
+        $this->sifra_odeljenja = $odeljenje->sifra;
+
+
+        $upit = "SELECT * FROM odeljenje WHERE 
+                sifra_odeljenja = '{$this->sifra_odeljenja}'";
+        
+        $rezultat_upita = mysqli_query($this->connection, $upit);
+        $redovi = mysqli_num_rows($rezultat_upita);
+
+        for($i = 0; $i < $redovi; $i++){
+            $podaci = mysqli_fetch_assoc($rezultat_upita);
+        }
+
+        
+
+        return $podaci;
+
+        
     }
 }
 

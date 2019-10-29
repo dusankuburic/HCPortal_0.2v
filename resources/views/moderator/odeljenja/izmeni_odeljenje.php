@@ -1,21 +1,22 @@
 
-
 <?php require_once("../includes/sidebar.php"); ?>
     
     <div id="page-content-wrapper">
         <div class="container-fluid">
         <p id="poruka"></p>
-        <h1 class="text-center">Dodaj odeljenje</h1>
+        <h1 class="text-center">Izmeni odeljenje</h1>
         <br>
             <div class="row justify-content-center">
                 <div class="col-lg-7 forma">
-                    <form method="post" onsubmit="return dodaj_odeljenje()">
+                    <form method="post" onsubmit="izmeni_odeljenje()">
                         <div class="form-group">
                             <h4>Naziv odeljenja</h4>
-                            <input type="text" id="naziv" class="form-control">
+                            <input type="hidden" value="" id="sifra">
+                            <input type="text" id="naziv" class="form-control" value="<?php if(isset($_GET['sifra'])){ echo $_GET['sifra'];} ?>">
                         </div>
 
-                        <input type="submit" class="btn btn-primary float-right" onclick="" value="Dodaj">
+
+                        <input type="submit" class="btn btn-primary float-right" onclick="" value="Sacuvaj">
                         <br><br>
                     </form>
 
@@ -33,4 +34,4 @@
 </div>
     <!-- d-flex wrapper END -->
 
-    <script src="../../js/moderator/dodaj_odeljenje.js"></script>
+    <script src="../../js/moderator/izmeni_odeljenje.js"></script>

@@ -51,6 +51,12 @@
                         </div>
 
                         <div class="form-group">
+                            <h4>Odeljenje</h4>
+                            <select class="form-control" id="odeljenje"></select>
+                        </div>
+
+
+                        <div class="form-group">
                             <h4>Sifra</h4>
                             <input type="text" id="sifra" class="form-control">
                         </div>
@@ -61,7 +67,7 @@
                         </div>
                         <br>
 
-                        <input type="submit" class="btn btn-primary float-right" onclick="" value="Dodaj">
+                        <input type="submit" class="btn btn-primary float-right"  value="Dodaj">
                         <br><br>
                     </form>
 

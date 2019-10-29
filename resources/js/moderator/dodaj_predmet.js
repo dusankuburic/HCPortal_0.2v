@@ -20,6 +20,7 @@ function dodaj_predmet(){
     xmlhttp.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
 
+            console.log(this.responseText);
              if(this.responseText === 'radi') {
                  alert('uspesno dodat predmet');
              } else {

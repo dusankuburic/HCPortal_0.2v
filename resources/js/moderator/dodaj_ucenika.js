@@ -92,6 +92,7 @@ function dodaj_ucenika(){
     var prezime_staratelja = document.getElementById("prezime_staratelja").value;
     var kontakt_telefon = document.getElementById("kontakt_telefon").value;
     var korisnicko_ime = document.getElementById("kor_ime").value;
+    var sifra_odeljenja = document.getElementById("odeljenje").value;
     var sifra = document.getElementById("sifra").value;
     var sifra_pot = document.getElementById("sifra_pot").value;
 
@@ -111,6 +112,7 @@ function dodaj_ucenika(){
        "ime_staratelja":ime_staratelja,
        "prezime_staratelja":prezime_staratelja,
        "kontakt_telefon":kontakt_telefon,
+       "sifra_odeljenja":sifra_odeljenja,
        "korisnicko_ime":korisnicko_ime,
        "sifra":sifra
    };
@@ -146,6 +148,49 @@ function dodaj_ucenika(){
 
 
 return false;
-
     
 }
+
+
+
+function sva_odeljenja(){
+
+    var xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+
+            var myObj = JSON.parse(this.responseText);
+            
+            
+            if(myObj.length !== 0){
+                var row = "";
+        
+            for(var i = 0; i < myObj.length; i++) {
+
+
+                row += "<option value='"+ myObj[i]['sifra_odeljenja']+"'>" + myObj[i]['naziv'] + " </option>";
+
+
+            }
+
+            document.getElementById("odeljenje").innerHTML = row;
+         } else {
+
+            document.getElementById("greska").innerHTML = 
+            `<div class="alert alert-danger text-center" role="alert">
+           Trenutno nema unetih odeljenja
+            </div>`;
+ 
+            
+         }
+         
+        }
+    };
+
+    xmlhttp.open("POST", "../../../app/responders/moderator/pregled_odeljenja.php", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send();
+}
+
+window.onload = sva_odeljenja();

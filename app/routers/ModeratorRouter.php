@@ -25,6 +25,10 @@ if(isset($_SESSION['moderator'])){
         require_once('../moderator/odeljenja/dodaj_odeljenje.php');
         break;
 
+        case 'izmeni_odeljenje': 
+        require_once('../moderator/odeljenja/izmeni_odeljenje.php');
+        break;
+
         case 'pregled_predmeta': 
         require_once('../moderator/predmeti/pregled_predmeta.php');
         break;

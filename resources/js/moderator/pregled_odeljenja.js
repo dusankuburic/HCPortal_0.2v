@@ -18,6 +18,7 @@ function sva_odeljenja(){
                 row += "<tr>";
                 row += "<td>" + myObj[i]['sifra_odeljenja'] + "</td>";
                 row += "<td>" + myObj[i]['naziv'] + "</td>";
+                row += "<td><input type='submit' class='btn btn-primary' onclick='ucitaj_odeljenje("+ myObj[i]['sifra_odeljenja']  +")'></td>";
                 row += "</tr>";
 
             }
@@ -39,6 +40,39 @@ function sva_odeljenja(){
     xmlhttp.open("POST", "../../../app/responders/moderator/pregled_odeljenja.php", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send();
+}
+
+
+
+function ucitaj_odeljenje(sifra_odeljenja){
+
+    var odeljenje = {
+        "sifra": sifra_odeljenja
+    };
+
+    xmlhttp = new XMLHttpRequest();
+    odeljenje_json = JSON.stringify(odeljenje);
+    
+    xmlhttp.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            
+          
+            console.log(this.responseText);
+            window.location.href = this.responseText;
+            //var myObj = JSON.parse(this.responseText);
+
+            //document.getElementById("naziv").value = myObj.naziv;
+
+            
+        }
+        
+    };
+
+
+    xmlhttp.open("POST","../../../app/responders/moderator/ucitaj_odeljenje.php", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send("odeljenje="+odeljenje_json);
+
 }
 
 window.onload = sva_odeljenja();

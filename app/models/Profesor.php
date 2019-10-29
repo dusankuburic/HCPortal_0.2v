@@ -95,7 +95,7 @@ class Profesor extends Database {
             $rezultat_upita = $red;
         }
 
-        if(empty($rezultat_upita)){
+        if(!$rezultat_upita){
 
             $upit = $this->prepare_query("INSERT INTO profesor(
                 ime,
