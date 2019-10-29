@@ -58,6 +58,8 @@ class Odeljenje extends Database {
 
     public function izmeni_odeljenje($podaci_korisnika){
 
+        $rezultat_upita = [];
+
         $odeljenje = json_decode($podaci_korisnika, false);
         $this->sifra_odeljenja = $odeljenje->sifra;
         $this->naziv = $odeljenje->naziv;
@@ -69,6 +71,7 @@ class Odeljenje extends Database {
         while($red = $upit->fetch_assoc()){
             $rezultat_upita = $red;
         }
+
 
         if(!$rezultat_upita){
 
@@ -122,12 +125,10 @@ class Odeljenje extends Database {
             $podaci = mysqli_fetch_assoc($rezultat_upita);
         }
 
-        
-
         return $podaci;
 
-        
     }
+    
 }
 
 

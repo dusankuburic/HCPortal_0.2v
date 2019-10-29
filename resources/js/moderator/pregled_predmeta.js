@@ -17,6 +17,7 @@ function svi_predmeti(){
                 row += "<tr>";
                 row += "<td>" + myObj[i]['sifra_predmeta'] + "</td>";
                 row += "<td>" + myObj[i]['naziv'] + "</td>";
+                row += "<td><input type='submit' value='Izmeni' class='btn btn-primary' onclick='ucitaj_predmet("+ myObj[i]['sifra_predmeta']  +")'></td>";
                 row += "</tr>";
 
             }
@@ -26,7 +27,7 @@ function svi_predmeti(){
 
             document.getElementById("greska").innerHTML = 
             `<div class="alert alert-danger text-center" role="alert">
-           Trenutno nema unetih predmeta
+                Trenutno nema unetih predmeta
             </div>`;
  
             
@@ -38,6 +39,34 @@ function svi_predmeti(){
     xmlhttp.open("POST", "../../../app/responders/moderator/pregled_predmeta.php", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send();
+}
+
+function ucitaj_predmet(sifra_predmeta){
+
+    var predmet = {
+        "sifra": sifra_predmeta
+    };
+
+    xmlhttp = new XMLHttpRequest();
+    predmet_json = JSON.stringify(predmet);
+    
+    xmlhttp.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            
+          
+            console.log(this.responseText);
+            window.location.href = this.responseText;
+
+            
+        }
+        
+    };
+
+
+    xmlhttp.open("POST","../../../app/responders/moderator/ucitaj_predmet.php", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send("predmet="+predmet_json);
+
 }
 
 window.onload = svi_predmeti();

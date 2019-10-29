@@ -14,6 +14,7 @@
                       <tr>
                         <th>Sifra</th>
                         <th>Naziv</th>
+                        <th>Opcije</th>
                       </tr>
                     </thead>
                     <tbody id="predmeti">

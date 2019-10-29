@@ -17,6 +17,7 @@ if(isset($_SESSION['moderator'])){
         require_once('../moderator/index.php');
         break;
 
+        /** ODELJENJA */
         case 'pregled_odeljenja': 
         require_once('../moderator/odeljenja/pregled_odeljenja.php');
         break;
@@ -29,6 +30,7 @@ if(isset($_SESSION['moderator'])){
         require_once('../moderator/odeljenja/izmeni_odeljenje.php');
         break;
 
+        /** PREDMETI */
         case 'pregled_predmeta': 
         require_once('../moderator/predmeti/pregled_predmeta.php');
         break;
@@ -37,6 +39,11 @@ if(isset($_SESSION['moderator'])){
         require_once('../moderator/predmeti/dodaj_predmet.php');
         break;
 
+        case 'izmeni_predmet': 
+        require_once('../moderator/predmeti/izmeni_predmet.php');
+        break;
+
+        /** MODERATORI */
         case 'pregled_moderatora': 
         require_once('../moderator/moderatori/pregled_moderatora.php');
         break;
@@ -45,6 +52,7 @@ if(isset($_SESSION['moderator'])){
         require_once('../moderator/moderatori/dodaj_moderatora.php');
         break;
 
+        /** PROFESORI */
         case 'pregled_profesora': 
         require_once('../moderator/profesori/pregled_profesora.php');
         break;
@@ -53,6 +61,7 @@ if(isset($_SESSION['moderator'])){
         require_once('../moderator/profesori/dodaj_profesora.php');
         break;
 
+        /** UCENICI */
         case 'pregled_ucenika': 
         require_once('../moderator/ucenici/pregled_ucenika.php');
         break;

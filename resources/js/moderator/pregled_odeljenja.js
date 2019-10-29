@@ -18,7 +18,7 @@ function sva_odeljenja(){
                 row += "<tr>";
                 row += "<td>" + myObj[i]['sifra_odeljenja'] + "</td>";
                 row += "<td>" + myObj[i]['naziv'] + "</td>";
-                row += "<td><input type='submit' class='btn btn-primary' onclick='ucitaj_odeljenje("+ myObj[i]['sifra_odeljenja']  +")'></td>";
+                row += "<td><input type='submit' value='Izmeni' class='btn btn-primary' onclick='ucitaj_odeljenje("+ myObj[i]['sifra_odeljenja']  +")'></td>";
                 row += "</tr>";
 
             }
@@ -59,9 +59,6 @@ function ucitaj_odeljenje(sifra_odeljenja){
           
             console.log(this.responseText);
             window.location.href = this.responseText;
-            //var myObj = JSON.parse(this.responseText);
-
-            //document.getElementById("naziv").value = myObj.naziv;
 
             
         }
