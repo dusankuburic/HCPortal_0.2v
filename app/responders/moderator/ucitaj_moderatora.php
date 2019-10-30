@@ -18,7 +18,6 @@ if(!$moderator_sa_sifrom){
 $_SESSION['sifra_moderatora'] = $moderator_sa_sifrom['sifra_moderatora'];
 
 echo "../layouts/moderator.php?route=izmeni_moderatora&sifra=".$moderator_sa_sifrom['sifra_moderatora'];
-//echo json_encode($odeljenje_sa_sifrom);
 
 }
 

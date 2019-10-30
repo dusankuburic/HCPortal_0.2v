@@ -112,6 +112,7 @@ class Moderator extends Database {
     public function izmeni_moderatora($podaci_korisnika){
 
         $rezultat_upita = [];
+        $rezultat = [];
         $poruka = "prazna";
 
         $moderator = json_decode($podaci_korisnika, false);
@@ -121,31 +122,67 @@ class Moderator extends Database {
         $this->prezime = $moderator->prezime;
         $this->korisnicko_ime = $moderator->korisnicko_ime;
 
+
+        //DA LI POSTOJI MODERATOR
         $upit =  $this->set_query("SELECT * FROM moderator 
-                WHERE korisnicko_ime = '{$this->korisnicko_ime}'");
+                WHERE sifra_moderatora = '{$this->sifra_moderatora}'");
 
         while($red = $upit->fetch_assoc()){
             $rezultat_upita = $red;
         }
+        //TODO: ...
+        //AKO POSTOJI
+        if($rezultat_upita){
+                //AKO KORISNIK ZELI DA IZMENI KOR_IME PROVERI DA LI VEC NEKO IMA
+                //TAKVO KORISNICKO_IME
+                if($this->korisnicko_ime !==  $rezultat_upita['korisnicko_ime']){
 
-        if(!$rezultat_upita){
+                $upit = $this->set_query("SELECT * FROM moderator 
+                        WHERE korisnicko_ime = '{$this->korisnicko_ime}'");
+                
+                while($red = $upit->fetch_assoc()){
+                    $rezultat = $red;
+                }
+                //AKO POSTOJI VRATI PORUKU
+                    if($rezultat){
+                        $poruka = "Vec postoji moderator sa odabranim korisnickim imenom";
+                        // U DRUGOM SLUCAJU IZMENI
+                    } else {
 
-            $upit = $this->prepare_query("UPDATE moderator SET
-                    ime = (?),
-                    prezime = (?),
-                    korisnicko_ime = (?)
-                    WHERE sifra_moderatora = {$this->sifra_moderatora}");
-            
-            $upit->bind_param("sss", 
-                    $this->ime, 
-                    $this->prezime,
-                    $this->korisnicko_ime);
-            
-            $upit->execute();
+                        $upit = $this->prepare_query("UPDATE moderator SET
+                        ime = (?),
+                        prezime = (?),
+                        korisnicko_ime = (?)
+                        WHERE sifra_moderatora = {$this->sifra_moderatora}");
+                
+                        $upit->bind_param("sss", 
+                                $this->ime, 
+                                $this->prezime,
+                                $this->korisnicko_ime);
+                        
+                        $upit->execute();
 
-            $poruka = "Uspesno izmenjen moderator";
+                        $poruka = "Uspesno izmenjen moderator";
+                    }
+            //KORISNICKO IME NIJE MENJANO
+            } else  {
+                $upit = $this->prepare_query("UPDATE moderator SET
+                ime = (?),
+                prezime = (?),
+                korisnicko_ime = (?)
+                WHERE sifra_moderatora = {$this->sifra_moderatora}");
+        
+                $upit->bind_param("sss", 
+                        $this->ime, 
+                        $this->prezime,
+                        $this->korisnicko_ime);
+                
+                $upit->execute();
+
+                $poruka = "Uspesno izmenjen moderator";
+            }
         } else {
-            $poruka = "Vec postoji moderator sa tim korisnickim imenom";
+            $poruka = "Nema takvog moderatora u bazi";
         }
 
         return $poruka;

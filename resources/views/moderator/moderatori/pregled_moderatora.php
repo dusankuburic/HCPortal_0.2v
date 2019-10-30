@@ -16,6 +16,7 @@
                         <th>Ime</th>
                         <th>Prezime</th>
                         <th>Korisnicko ime</th>
+                        <th>Opcije</th>
                       </tr>
                     </thead>
                     <tbody id="moderatori">
