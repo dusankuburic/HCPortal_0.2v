@@ -52,6 +52,10 @@ if(isset($_SESSION['moderator'])){
         require_once('../moderator/moderatori/dodaj_moderatora.php');
         break;
 
+        case 'izmeni_moderatora': 
+        require_once('../moderator/moderatori/izmeni_moderatora.php');
+        break;
+
         /** PROFESORI */
         case 'pregled_profesora': 
         require_once('../moderator/profesori/pregled_profesora.php');

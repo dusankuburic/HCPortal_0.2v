@@ -109,6 +109,52 @@ class Moderator extends Database {
     }
 
 
+    public function izmeni_moderatora($podaci_korisnika){
+
+        $rezultat_upita = [];
+        $poruka = "prazna";
+
+        $moderator = json_decode($podaci_korisnika, false);
+
+        $this->sifra_moderatora = $moderator->sifra;
+        $this->ime = $moderator->ime;
+        $this->prezime = $moderator->prezime;
+        $this->korisnicko_ime = $moderator->korisnicko_ime;
+
+        $upit =  $this->set_query("SELECT * FROM moderator 
+                WHERE korisnicko_ime = '{$this->korisnicko_ime}'");
+
+        while($red = $upit->fetch_assoc()){
+            $rezultat_upita = $red;
+        }
+
+        if(!$rezultat_upita){
+
+            $upit = $this->prepare_query("UPDATE moderator SET
+                    ime = (?),
+                    prezime = (?),
+                    korisnicko_ime = (?)
+                    WHERE sifra_moderatora = {$this->sifra_moderatora}");
+            
+            $upit->bind_param("sss", 
+                    $this->ime, 
+                    $this->prezime,
+                    $this->korisnicko_ime);
+            
+            $upit->execute();
+
+            $poruka = "Uspesno izmenjen moderator";
+        } else {
+            $poruka = "Vec postoji moderator sa tim korisnickim imenom";
+        }
+
+        return $poruka;
+    }
+
+
+
+
+
     public function svi_moderatori(){
         
         $rezultat_upita = [];
@@ -120,6 +166,31 @@ class Moderator extends Database {
         }
 
         return $rezultat_upita;
+    }
+
+
+    public function sa_sifrom($podaci_korisnika){
+
+        $moderator = json_decode($podaci_korisnika, false);
+        $podaci = [];
+       
+        
+        $this->sifra_moderatora = $moderator->sifra;
+
+
+        $upit = "SELECT sifra_moderatora, ime, prezime, korisnicko_ime 
+                FROM moderator WHERE 
+                sifra_moderatora = '{$this->sifra_moderatora}'";
+        
+        $rezultat_upita = mysqli_query($this->connection, $upit);
+        $redovi = mysqli_num_rows($rezultat_upita);
+
+        for($i = 0; $i < $redovi; $i++){
+            $podaci = mysqli_fetch_assoc($rezultat_upita);
+        }
+
+        return $podaci;
+
     }
 
 
