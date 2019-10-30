@@ -79,6 +79,11 @@ if(isset($_SESSION['moderator'])){
         break;
 
 
+        case 'izmeni_ucenika': 
+        require_once('../moderator/ucenici/izmeni_ucenika.php');
+        break;
+
+
         default:
         require_once('../moderator/index.php');
         break;

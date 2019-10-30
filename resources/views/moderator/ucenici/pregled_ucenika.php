@@ -21,6 +21,7 @@
                         <th>Prezime staratelja</th>
                         <th>Kontakt telefon</th>
                         <th>Korisnicko ime</th>
+                        <th>Opcije</th>
                       </tr>
                     </thead>
                     <tbody id="ucenici">

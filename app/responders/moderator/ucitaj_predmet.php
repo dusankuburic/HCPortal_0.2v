@@ -18,7 +18,7 @@ if(!$predmet_sa_sifrom){
 $_SESSION['sifra_predmeta'] = $predmet_sa_sifrom['sifra_predmeta'];
 
 echo "../layouts/moderator.php?route=izmeni_predmet&sifra=".$predmet_sa_sifrom['sifra_predmeta'];
-//echo json_encode($odeljenje_sa_sifrom);
+
 
 }
 

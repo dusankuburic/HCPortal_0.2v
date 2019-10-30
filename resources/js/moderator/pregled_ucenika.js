@@ -23,6 +23,7 @@ function svi_ucenici(){
                 row += "<td>" + myObj[i]['prezime_staratelja'] + "</td>";
                 row += "<td>" + myObj[i]['kontakt_telefon'] + "</td>";
                 row += "<td>" + myObj[i]['korisnicko_ime'] + "</td>";
+                row += "<td><input type='submit' value='Izmeni' class='btn btn-primary' onclick='ucitaj_ucenika("+ myObj[i]['sifra_ucenika']  +")'></td>";
                 row += "</tr>";
 
             }
@@ -45,5 +46,30 @@ function svi_ucenici(){
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send();
 }
+
+
+function ucitaj_ucenika(sifra_ucenika){
+
+    var ucenik = {
+        "sifra": sifra_ucenika
+    };
+
+
+    xmlhttp = new XMLHttpRequest();
+    ucenik_json = JSON.stringify(ucenik);
+
+    xmlhttp.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            
+            console.log(this.responseText);
+            window.location.href = this.responseText;
+        }
+    };
+
+    xmlhttp.open("POST","../../../app/responders/moderator/ucitaj_ucenika.php", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send("ucen="+ucenik_json);
+}
+
 
 window.onload = svi_ucenici();
