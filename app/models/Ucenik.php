@@ -293,6 +293,4 @@ class Ucenik extends Database {
         return $podaci;
 
     }
-
-
 }

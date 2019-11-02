@@ -249,6 +249,4 @@ class Profesor extends Database {
 
     }
 
-    
-
 }

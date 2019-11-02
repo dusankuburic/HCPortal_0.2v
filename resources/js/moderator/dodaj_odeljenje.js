@@ -11,22 +11,52 @@ function validacija(naziv_odeljenja){
     return rezultat;
 }
 
+function razredi(){
+
+    var prvi = document.getElementById("prvi");
+    var drugi = document.getElementById("drugi");
+    var treci = document.getElementById("treci");
+    var cetvrti = document.getElementById("cetvrti");
+
+    var rezultat = '';
+
+
+    if(prvi.checked){
+        rezultat = prvi.value;
+    }
+    if(drugi.checked){
+        rezultat =  drugi.value;
+    }
+    if(treci.checked){
+        rezultat =  treci.value;
+    }
+    if(cetvrti.checked){
+        rezultat = cetvrti.value;
+    }
+
+
+    return rezultat;
+}
+
 
 function dodaj_odeljenje(){
 
     var naziv_odeljenja = document.getElementById("naziv").value;
+    var rez = validacija();
+    var razred = razredi();
 
-    var rez = validacija(naziv_odeljenja);
 
     if(rez == true){
          
     var odejenje = {
-        "naziv": naziv_odeljenja
+        "naziv": naziv_odeljenja,
+        "razred": razred
     };
 
     xmlhttp = new XMLHttpRequest();
     odeljenje_json = JSON.stringify(odejenje);
 
+    console.log(odeljenje_json);
 
     xmlhttp.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){

@@ -1,7 +1,5 @@
 <?php
 
-
-
 interface IConnection {
     public function set_parameters($host, $user, $password, $name);
     public function connect_to_db();

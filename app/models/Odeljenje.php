@@ -7,6 +7,8 @@ class Odeljenje extends Database {
 
     private $naziv;
 
+    private $razred;
+
 
     public function __construct(){
 
@@ -25,6 +27,7 @@ class Odeljenje extends Database {
 
         $odeljenje = json_decode($podaci_korisnika, false);
         $this->naziv =  $odeljenje->naziv;
+        $this->razred = $odeljenje->razred;
 
 
         $upit = "SELECT * FROM odeljenje WHERE naziv = '{$this->naziv}'";
@@ -39,10 +42,10 @@ class Odeljenje extends Database {
 
         if(!$rezultat_upita){
 
-            $upit = $this->prepare_query("INSERT INTO odeljenje(naziv)
-            VALUES(?)");
+            $upit = $this->prepare_query("INSERT INTO odeljenje(naziv, razred)
+                    VALUES(?,?)");
 
-            $upit->bind_param("s", $this->naziv);
+            $upit->bind_param("ss", $this->naziv, $this->razred);
 
             $upit->execute();
 
@@ -59,36 +62,67 @@ class Odeljenje extends Database {
     public function izmeni_odeljenje($podaci_korisnika){
 
         $rezultat_upita = [];
+        $rezultat = [];
+        $poruka = "prazna";
 
         $odeljenje = json_decode($podaci_korisnika, false);
+
         $this->sifra_odeljenja = $odeljenje->sifra;
         $this->naziv = $odeljenje->naziv;
+        $this->razred = $odeljenje->razred;
 
 
         $upit = $this->set_query("SELECT * FROM odeljenje 
-                WHERE naziv = '{$this->naziv}'");
+                WHERE sifra_odeljenja = '{$this->sifra_odeljenja}'");
 
         while($red = $upit->fetch_assoc()){
             $rezultat_upita = $red;
         }
 
 
-        if(!$rezultat_upita){
+        if($rezultat_upita){
 
-            $upit = $this->prepare_query("UPDATE odeljenje SET
-                    naziv = (?)
-                    WHERE sifra_odeljenja = {$this->sifra_odeljenja}");
-            
-            $upit->bind_param("s", $this->naziv);
+            if($this->naziv !== $rezultat_upita['naziv']){
+                
+                $upit = $this->set_query("SELECT * FROM odeljenje
+                        WHERE naziv = '{$this->naziv}'");
+                
+                while($red = $upit->fetch_assoc()){
+                    $rezultat = $red;
+                }
 
-            $upit->execute();
+                if($rezultat){
+                    $poruka = "Vec postoji odeljenje sa tim nazivom";
+                } else {
 
-            $poruka = "Uspesno izmenjeno odeljenje";
+                    $upit = $this->prepare_query("UPDATE odeljenje SET
+                            naziv = (?),
+                            razred = (?)
+                            WHERE sifra_odeljenja = {$this->sifra_odeljenja}");
 
+                    $upit->bind_param("ss", $this->naziv, $this->razred);
+
+                    $upit->execute();
+
+                    $poruka = "Uspesno izmenjeno odeljenje";
+                }
+            }
+            else {
+                
+                $upit = $this->prepare_query("UPDATE odeljenje SET
+                        naziv = (?),
+                        razred = (?)
+                        WHERE sifra_odeljenja = {$this->sifra_odeljenja}");
+                
+                $upit->bind_param("ss", $this->naziv, $this->razred);
+
+                $upit->execute();
+
+                $poruka = "Uspesno izmenjeno odeljenje";
+            }
         } else {
-            $poruka = "Vec postoji odeljenje sa tim imenom";
+            $poruka = "Nema takvog odeljenja u bazi";
         }
-
         return $poruka;
     }
 
