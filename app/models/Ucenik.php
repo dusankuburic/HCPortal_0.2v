@@ -291,6 +291,31 @@ class Ucenik extends Database {
         }
 
         return $podaci;
+    }
+
+
+    public function sa_sifrom_odeljenja($podaci_korisnika){
+
+        $odeljenje = json_decode($podaci_korisnika, false);
+        $podaci = [];
+       
+        
+        $this->sifra_odeljenja = $odeljenje->sifra;
+
+
+        $upit = "SELECT sifra_ucenika, ime, prezime,
+                korisnicko_ime, jmbg,sifra_odeljenja 
+                FROM ucenik WHERE 
+                sifra_odeljenja = '{$this->sifra_odeljenja}'";
+        
+        $rezultat_upita = mysqli_query($this->connection, $upit);
+        $redovi = mysqli_num_rows($rezultat_upita);
+
+        for($i = 0; $i < $redovi; $i++){
+            $podaci[] = mysqli_fetch_assoc($rezultat_upita);
+        }
+
+        return $podaci;
 
     }
 }

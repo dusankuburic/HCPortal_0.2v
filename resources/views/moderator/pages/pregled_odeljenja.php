@@ -13,7 +13,7 @@
                         <tr>
                           <th>Sifra</th>
                           <th>Naziv</th>
-                          <th>Opcije</th>
+                          <th>Pregledaj učenike</th>
                         </tr>
                       </thead>
                       <tbody id="odeljenja">

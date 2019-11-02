@@ -84,13 +84,17 @@ if(isset($_SESSION['moderator'])){
         break;
 
 
-        /** UPISI OCENE */
+        /** UPIS OCENA */
         case 'upis_ocena': 
         require_once('../moderator/pages/upis_ocena.php');
         break;
 
         case 'pregled_odeljenja_za_upis_ocena': 
         require_once('../moderator/pages/pregled_odeljenja.php');
+        break;
+
+        case 'pregled_ucenika_za_upis_ocena': 
+        require_once('../moderator/pages/pregled_ucenika.php');
         break;
 
 
