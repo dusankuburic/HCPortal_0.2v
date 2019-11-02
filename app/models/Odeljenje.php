@@ -140,6 +140,27 @@ class Odeljenje extends Database {
         return $rezultat_upita;
     }
 
+    public function sva_odeljenja_sa_razredom($podaci_korisnika){
+
+        $odeljenje = json_decode($podaci_korisnika);
+        $podaci = [];
+        
+        $this->razred = $odeljenje->razred;
+
+        
+        $upit = "SELECT * FROM odeljenje WHERE 
+                razred = '{$this->razred}'";
+        
+        $rezultat_upita = mysqli_query($this->connection, $upit);
+        $redovi = mysqli_num_rows($rezultat_upita);
+
+        for($i = 0; $i < $redovi; $i++){
+            $podaci[] = mysqli_fetch_assoc($rezultat_upita);
+        }
+
+        return $podaci;
+    }
+
     public function sa_sifrom($podaci_korisnika){
 
         $odeljenje = json_decode($podaci_korisnika, false);

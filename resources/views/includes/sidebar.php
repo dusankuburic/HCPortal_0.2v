@@ -62,6 +62,18 @@
             </div>
             </div>
 
+            <!--Upis ocena-->
+            <div class="dropdown">
+            <a class="list-group-item list-group-item-action bg-light "  id="dropdownMenu"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-award"></i> Ocene
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+                <a class="dropdown-item" href="../layouts/moderator.php?route=upis_ocena">Upiši ocene</a>
+            </div>
+            </div>
+            
+
+
 
 
         </div>
