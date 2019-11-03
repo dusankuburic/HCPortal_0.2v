@@ -5,9 +5,11 @@ require_once("Database.php");
 
 class Predmet extends Database {
 
-    private $id;
+    private $sifra_predmeta;
 
     private $naziv;
+
+    private $razred;
 
 
     public function __construct(){
@@ -23,37 +25,68 @@ class Predmet extends Database {
     public function izmeni_predmet($podaci_korisnika){
 
         $rezultat_upita = [];
+        $rezultat = [];
+        $poruka = "prazna";
 
         $predmet = json_decode($podaci_korisnika, false);
+
         $this->sifra_predmeta = $predmet->sifra;
         $this->naziv = $predmet->naziv;
+        $this->razred = $predmet->razred;
 
 
-        $upit = $this->set_query("SELECT * FROM predmet 
-                WHERE naziv = '{$this->naziv}'");
+        $upit = $this->set_query("SELECT * FROM predmet
+                WHERE sifra_predmeta = '{$this->sifra_predmeta}'");
 
         while($red = $upit->fetch_assoc()){
             $rezultat_upita = $red;
         }
 
+        if($rezultat_upita){
 
-        if(!$rezultat_upita){
+            if($this->naziv !== $rezultat_upita['naziv']){
 
-            $upit = $this->prepare_query("UPDATE predmet SET
-                    naziv = (?)
-                    WHERE sifra_predmeta = {$this->sifra_predmeta}");
-            
-            $upit->bind_param("s", $this->naziv);
+                $upit = $this->set_query("SELECT * FROM predmet
+                        WHERE naziv = '{$this->naziv}'");
+                
+                while($red = $upit->fetch_assoc()){
+                    $rezultat = $red;
+                }
 
-            $upit->execute();
+                if($rezultat){
+                    $poruka = "Vec postoji predmet sa tim nazivom";
+                } else {
+                    
+                    $upit = $this->prepare_query("UPDATE predmet SET
+                            naziv = (?),
+                            razred = (?)
+                            WHERE sifra_predmeta = {$this->sifra_predmeta}");
+                    
+                    $upit->bind_param("ss", $this->naziv, $this->razred);
 
-            $poruka = "Uspesno izmenjen predmet";
+                    $upit->execute();
 
+                    $poruka = "Uspesno izmenjeno odeljenje";
+                }
+            } else {
+
+                $upit = $this->prepare_query("UPDATE predmet SET
+                        naziv = (?),
+                        razred = (?)
+                        WHERE sifra_predmeta = {$this->sifra_predmeta}");
+                
+                $upit->bind_param("ss", $this->naziv, $this->razred);
+
+                $upit->execute();
+
+                $poruka = "Uspesno izmenjen predmet";
+            }
         } else {
-            $poruka = "Vec postoji predmet sa tim imenom";
+            $poruka = "Nema takvog predmeta u bazi";
         }
 
         return $poruka;
+    
     }
 
 
@@ -61,14 +94,17 @@ class Predmet extends Database {
     public function dodaj_predmet($podaci_korisnika){
 
         $rezultat_upita = [];
-        $predmet_postoji = true;
+        $poruka = "prazna";
+
 
         $predmet = json_decode($podaci_korisnika, false);
-
         $this->naziv = $predmet->naziv;
+        $this->razred = $predmet->razred;
 
-        $upit = $this->set_query("SELECT * FROM predmet 
-                WHERE naziv = '{$this->naziv}'");
+
+
+        $upit = $this->set_query("SELECT * FROM predmet WHERE naziv = '{$this->naziv}'");
+
 
         while($red = $upit->fetch_assoc()){
             $rezultat_upita = $red;
@@ -77,19 +113,21 @@ class Predmet extends Database {
         if(!$rezultat_upita){
 
     
-            $upit = $this->prepare_query("INSERT INTO predmet(naziv)
-                    VALUES(?)");
+            $upit = $this->prepare_query("INSERT INTO predmet(naziv, razred)
+                    VALUES(?, ?)");
     
-            $upit->bind_param("s", $this->naziv);
+            $upit->bind_param("ss", $this->naziv, $this->razred);
 
             $upit->execute();
 
-            $predmet_postoji = false;
+            $poruka = "Uspesno dodat predmet";
+        } else {
+            $poruka = "Vec postoji odeljenje";
         }
             
         
 
-        return $predmet_postoji;
+        return $poruka;
 
     }
 

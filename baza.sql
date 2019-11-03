@@ -8,6 +8,7 @@ PRIMARY KEY(sifra_odeljenja)
 CREATE TABLE predmet(
 sifra_predmeta INTEGER NOT NULL AUTO_INCREMENT,
 naziv VARCHAR(60) NOT NULL,
+razred INT NOT NULL,
 PRIMARY KEY(sifra_predmeta)
 );
 

@@ -5,7 +5,9 @@
   <div id="greska"></div>
       <div class="container-fluid">
       <h1 class="text-center pt-5">Pregled učenika</h1>
-     
+      <h4 class="text-center" id="naziv_odeljenja"></h4>
+      <h4 class="text-center" id="razred"></h4>
+      
           <div class="row justify-content-center">
           <input type="hidden" id="sifra" class="form-control" value="<?php if(isset($_GET['sifra'])){ echo $_GET['sifra'];} ?>">
           <div class="col-lg-8">

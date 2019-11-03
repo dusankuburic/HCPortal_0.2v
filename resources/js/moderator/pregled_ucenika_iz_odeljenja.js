@@ -34,11 +34,12 @@ function svi_ucenici(){
 
                 document.getElementById("ucenici").innerHTML = row;
             } else {
-
+                
                 document.getElementById("greska").innerHTML = 
                 `<div class="alert alert-danger text-center" role="alert">
                     Trenutno nema unetih ucenika
                 </div>`;   
+                
             }
              
         }
@@ -78,4 +79,35 @@ function ucitaj_ucenika(sifra_ucenika){
 }
 
 
+function ucitaj_odeljenje(){
+
+    var sifra_odeljenja = document.getElementById("sifra").value;
+
+    var odeljenje = {
+        "sifra": sifra_odeljenja
+    };
+
+    xmlhttp = new XMLHttpRequest();
+    odeljenje_json = JSON.stringify(odeljenje);
+    
+    xmlhttp.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+
+            var myObj  = JSON.parse(this.responseText);
+            document.getElementById("naziv_odeljenja").innerHTML = 'Odeljenje: ' + myObj['naziv'];
+            document.getElementById("razred").innerHTML = 'Razred: ' + myObj['razred'];
+ 
+        }
+        
+    };
+
+
+    xmlhttp.open("POST","../../../app/responders/moderator/vrati_odeljenje.php", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send("odeljenje="+odeljenje_json);
+
+}
+
+
 window.onload = svi_ucenici();
+window.onload = ucitaj_odeljenje();

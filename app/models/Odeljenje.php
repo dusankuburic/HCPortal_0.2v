@@ -23,7 +23,7 @@ class Odeljenje extends Database {
     public function dodaj_odeljenje($podaci_korisnika){
 
         $rezultat_upita = [];
-        $poruka = "";
+        $poruka = "prazna";
 
         $odeljenje = json_decode($podaci_korisnika, false);
         $this->naziv =  $odeljenje->naziv;
@@ -31,12 +31,12 @@ class Odeljenje extends Database {
 
 
         $upit = "SELECT * FROM odeljenje WHERE naziv = '{$this->naziv}'";
-        $result = mysqli_query($this->connection, $upit);
+        $rezultat = mysqli_query($this->connection, $upit);
    
 
-        $redovi = mysqli_num_rows($result);
+        $redovi = mysqli_num_rows($rezultat);
         for($i = 0; $i < $redovi; $i++){
-            $rezultat_upita[] = mysqli_fetch_assoc($result);
+            $rezultat_upita[] = mysqli_fetch_assoc($rezultat);
         }
 
 
@@ -79,7 +79,6 @@ class Odeljenje extends Database {
             $rezultat_upita = $red;
         }
 
-
         if($rezultat_upita){
 
             if($this->naziv !== $rezultat_upita['naziv']){
@@ -106,8 +105,7 @@ class Odeljenje extends Database {
 
                     $poruka = "Uspesno izmenjeno odeljenje";
                 }
-            }
-            else {
+            } else {
                 
                 $upit = $this->prepare_query("UPDATE odeljenje SET
                         naziv = (?),
