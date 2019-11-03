@@ -2,7 +2,6 @@ function svi_ucenici(){
 
     var sifra = document.getElementById("sifra").value;
 
-
     var odeljenje = {
         "sifra":sifra
     };
@@ -27,7 +26,7 @@ function svi_ucenici(){
                     row += "<td>" + myObj[i]['prezime'] + "</td>";
                     row += "<td>" + myObj[i]['jmbg'] + "</td>";
                     row += "<td>" + myObj[i]['korisnicko_ime'] + "</td>";
-                    row += "<td><input type='submit' value='Pregledaj' class='btn btn-primary' onclick='ucitaj_ucenika("+ myObj[i]['sifra_ucenika']  +")'></td>";
+                    row += "<td><input type='submit' value='Pregledaj' class='btn btn-primary' onclick='ucitaj_predmete_ucenika("+ myObj[i]['sifra_ucenika']  +")'></td>";
                     row += "</tr>";
 
                 }
@@ -51,11 +50,8 @@ function svi_ucenici(){
 }
 
 
-/** Otvori panel za pregled ocena i predmeta koje ucenik uci */
-/** ispisi sve predmete koji se uce kom razredu */
-/** dodaj razred za svaki predmet kako bi znao koje odljenje da ispisem za koji razred */
 
-function ucitaj_ucenika(sifra_ucenika){
+function ucitaj_predmete_ucenika(sifra_ucenika){
 
     var ucenik = {
         "sifra": sifra_ucenika
@@ -73,7 +69,7 @@ function ucitaj_ucenika(sifra_ucenika){
         }
     };
 
-    xmlhttp.open("POST","../../../app/responders/moderator/ucitaj_ucenika.php", true);
+    xmlhttp.open("POST","../../../app/responders/moderator/ucitaj_predmete_ucenika.php", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send("ucen="+ucenik_json);
 }

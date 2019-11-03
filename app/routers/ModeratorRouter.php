@@ -97,6 +97,10 @@ if(isset($_SESSION['moderator'])){
         require_once('../moderator/pages/pregled_ucenika.php');
         break;
 
+        
+        case 'pregled_predmeta_ucenika': 
+        require_once('../moderator/pages/pregled_predmeta_ucenika.php');
+        break;
 
 
         default:

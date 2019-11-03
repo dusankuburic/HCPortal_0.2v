@@ -267,6 +267,47 @@ class Ucenik extends Database {
     }
 
 
+    public function predmeti_koje_uci($podaci_korisnika){
+
+        /**moglo je i bolje al ajde, kasnije...nikad... */
+        $rezultat_upita = [];
+        $rezultat = [];
+
+        $ucenik = json_decode($podaci_korisnika);
+        $this->sifra_ucenika = $ucenik->sifra;
+
+        $upit = $this->set_query("SELECT sifra_odeljenja FROM ucenik
+                WHERE sifra_ucenika = {$this->sifra_ucenika}");
+        
+        while($red = $upit->fetch_assoc()){
+            $rezultat_upita = $red;
+        }
+
+        $sifra_odeljenja = $rezultat_upita['sifra_odeljenja'];
+
+        $upit = $this->set_query("SELECT razred FROM odeljenje
+                WHERE sifra_odeljenja = '{$sifra_odeljenja}'");
+
+        while($red = $upit->fetch_assoc()){
+            $rezultat_upita = $red;
+        }
+
+        $razred = $rezultat_upita['razred'];
+
+        $upit = $this->set_query("SELECT * FROM predmet
+                WHERE razred = {$razred}");
+        
+        while($red = $upit->fetch_assoc()){
+            $rezultat[] = $red;
+        }
+
+
+       
+        return $rezultat;
+        
+    }
+
+
     public function sa_sifrom($podaci_korisnika){
 
         $ucenik = json_decode($podaci_korisnika, false);
