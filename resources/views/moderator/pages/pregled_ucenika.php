@@ -19,7 +19,7 @@
                         <th>Prezime</th>
                         <th>Jmbg</th>
                         <th>Korisnicko ime</th>
-                        <th>Pregled ocena</th>
+                        <th>Pregled predmeta</th>
                       </tr>
                     </thead>
                     <tbody id="ucenici">

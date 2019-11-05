@@ -64,6 +64,7 @@ CREATE TABLE ucenik_ima_ocenu (
     sifra_predmeta INTEGER,
     ocena INTEGER NOT NULL,
     polugodiste INTEGER NOT NULL,
+    opis VARCHAR(50) NOT NULL,
     datum_izmene TIMESTAMP,
     FOREIGN KEY(sifra_ucenika) REFERENCES ucenik(sifra_ucenika),
     FOREIGN KEY(sifra_predmeta) REFERENCES predmet(sifra_predmeta)

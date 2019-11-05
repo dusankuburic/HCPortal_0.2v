@@ -24,7 +24,8 @@ function svi_predmeti(){
                 row += "<tr>";
                 row += "<td>" + myObj[i]['sifra_predmeta'] + "</td>";
                 row += "<td>" + myObj[i]['naziv'] + "</td>";
-                row += "<td><input type='submit' value='Izmeni' class='btn btn-primary' onclick='ucitaj_predmet("+ myObj[i]['sifra_predmeta']  +")'></td>";
+                //<input type='submit' value='Izmeni' class='btn btn-primary' onclick='ucitaj_predmet("+ myObj[i]['sifra_predmeta']  +")'>
+                row += "<td><a href='../layouts/moderator.php?route=pregled_ocena_ucenika&sifra_ucenika="+ sifra +"&sifra_predmeta="+ myObj[i]['sifra_predmeta']  +"' class='btn btn-primary'>Pregledaj</a></td>";
                 row += "</tr>";
 
             }

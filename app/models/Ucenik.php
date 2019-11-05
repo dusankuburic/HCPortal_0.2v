@@ -357,6 +357,30 @@ class Ucenik extends Database {
         }
 
         return $podaci;
+    }
 
+
+    public function ocene_sa_polugodista($podaci_korisnika){
+
+        $ucenik = json_decode($podaci_korisnika, false);
+        $podaci = [];
+
+        $this->sifra_ucenika = $ucenik->sifra_ucenika;
+        $sifra_predmeta = $ucenik->sifra_predmeta;
+        $polugodiste = $ucenik->polugodiste;
+
+        $upit = "SELECT * FROM ucenik_ima_ocenu 
+                WHERE sifra_ucenika = {$this->sifra_ucenika} AND
+                sifra_predmeta = {$sifra_predmeta} AND
+                polugodiste = {$polugodiste}";
+
+        $rezultat_upita = mysqli_query($this->connection, $upit);
+        $redovi = mysqli_num_rows($rezultat_upita);
+
+        for($i = 0; $i < $redovi; $i++){
+            $podaci[] = mysqli_fetch_assoc($rezultat_upita);
+        }
+
+        return $podaci;
     }
 }

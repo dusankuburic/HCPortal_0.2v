@@ -97,11 +97,13 @@ if(isset($_SESSION['moderator'])){
         require_once('../moderator/pages/pregled_ucenika.php');
         break;
 
-        
         case 'pregled_predmeta_ucenika': 
         require_once('../moderator/pages/pregled_predmeta_ucenika.php');
         break;
 
+        case 'pregled_ocena_ucenika': 
+        require_once('../moderator/pages/pregled_ocena_ucenika.php');
+        break;
 
         default:
         require_once('../moderator/index.php');

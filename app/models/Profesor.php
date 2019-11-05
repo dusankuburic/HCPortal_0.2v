@@ -249,4 +249,48 @@ class Profesor extends Database {
 
     }
 
+
+
+    public function upisi_ocenu($podaci_korisnika){
+
+        $poruka = "prazna";
+        $za_upis = json_decode($podaci_korisnika);
+
+        $sifra_ucenika = $za_upis->sifra_ucenika;
+        $sifra_predmeta = $za_upis->sifra_predmeta;
+        $ocena = $za_upis->ocena;
+        $polugodiste = $za_upis->polugodiste;
+        $opis = $za_upis->opis;
+        
+
+
+        $upit = $this->prepare_query("INSERT INTO ucenik_ima_ocenu(
+                sifra_ucenika, 
+                sifra_predmeta, 
+                ocena, 
+                polugodiste, 
+                opis)
+                VALUE(?, ?, ?, ?, ?)");
+
+        $upit->bind_param("sssss",
+                $sifra_ucenika,
+                $sifra_predmeta,
+                $ocena,
+                $polugodiste,
+                $opis);
+        
+        $rezultat =  $upit->execute();
+
+        if($rezultat){
+            $poruka = "Uspesno upisana ocena";
+        } else {
+            $poruka = "OCENA NIJE UPISANA, GRESKA!";
+        }
+
+
+        return $poruka;
+        
+
+    }
+
 }
