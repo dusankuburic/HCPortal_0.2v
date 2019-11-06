@@ -271,6 +271,7 @@ class Ucenik extends Database {
 
         /**moglo je i bolje al ajde, kasnije...nikad... */
         $rezultat_upita = [];
+        $sifre_predmeta = [];
         $rezultat = [];
 
         $ucenik = json_decode($podaci_korisnika);
@@ -294,11 +295,23 @@ class Ucenik extends Database {
 
         $razred = $rezultat_upita['razred'];
 
-        $upit = $this->set_query("SELECT * FROM predmet
+        $upit = $this->set_query("SELECT sifra_predmeta FROM razred_ima_predmet
                 WHERE razred = {$razred}");
+
         
         while($red = $upit->fetch_assoc()){
-            $rezultat[] = $red;
+            $sifre_predmeta[] = $red;
+        }
+
+        
+        foreach($sifre_predmeta as $tek_sifra){
+
+            $upit = $this->set_query("SELECT * FROM predmet 
+                    WHERE sifra_predmeta = {$tek_sifra['sifra_predmeta']}");
+            
+            $red = $upit->fetch_assoc();
+
+            array_push($rezultat, $red);
         }
 
 

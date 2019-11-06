@@ -9,7 +9,6 @@ class Predmet extends Database {
 
     private $naziv;
 
-    private $razred;
 
 
     public function __construct(){
@@ -32,7 +31,7 @@ class Predmet extends Database {
 
         $this->sifra_predmeta = $predmet->sifra;
         $this->naziv = $predmet->naziv;
-        $this->razred = $predmet->razred;
+        $razredi = $predmet->razred;
 
 
         $upit = $this->set_query("SELECT * FROM predmet
@@ -56,31 +55,79 @@ class Predmet extends Database {
                 if($rezultat){
                     $poruka = "Vec postoji predmet sa tim nazivom";
                 } else {
-                    
-                    $upit = $this->prepare_query("UPDATE predmet SET
-                            naziv = (?),
-                            razred = (?)
+
+                    $this->connection->begin_transaction();             
+
+                    $upit = $this->prepare_query("UPDATE predmet SET naziv = (?)
                             WHERE sifra_predmeta = {$this->sifra_predmeta}");
-                    
-                    $upit->bind_param("ss", $this->naziv, $this->razred);
+
+                    $upit->bind_param("s", $this->naziv);
 
                     $upit->execute();
+
+
+                    $upit = $this->prepare_query("DELETE FROM razred_ima_predmet
+                            WHERE sifra_predmeta = {$this->sifra_predmeta}");
+
+                    $upit->bind_param("s", $this->sifra_predmeta);
+
+                    $upit->execute();
+
+
+                    $upit = $this->prepare_query("INSERT INTO razred_ima_predmet(sifra_predmeta, razred)
+                            VALUES(?, ?)");
+
+
+                    $upit->bind_param("ss",$this->sifra_predmeta, $razred);
+
+                    foreach($razredi as $razred){
+                        if(!$upit->execute()){
+                            $this->connection->rollback();
+                        }
+                    }
+
+                    $this->connection->commit();
 
                     $poruka = "Uspesno izmenjeno odeljenje";
                 }
             } else {
 
-                $upit = $this->prepare_query("UPDATE predmet SET
-                        naziv = (?),
-                        razred = (?)
+                $this->connection->begin_transaction();
+
+                $upit = $this->prepare_query("UPDATE predmet SET naziv = (?)
                         WHERE sifra_predmeta = {$this->sifra_predmeta}");
-                
-                $upit->bind_param("ss", $this->naziv, $this->razred);
+
+                $upit->bind_param("s", $this->naziv);
 
                 $upit->execute();
 
+
+                $upit = $this->prepare_query("DELETE FROM razred_ima_predmet
+                        WHERE sifra_predmeta = (?)");
+
+                $upit->bind_param("s", $this->sifra_predmeta);
+
+                $upit->execute();
+
+
+                $upit = $this->prepare_query("INSERT INTO razred_ima_predmet(sifra_predmeta, razred)
+                        VALUES(?, ?)");
+
+
+                $upit->bind_param("ss",$this->sifra_predmeta, $razred);
+
+                foreach($razredi as $razred){
+                    if(!$upit->execute()){
+                        $this->connection->rollback();
+                    }
+                }
+
+                $this->connection->commit();
+
                 $poruka = "Uspesno izmenjen predmet";
+
             }
+
         } else {
             $poruka = "Nema takvog predmeta u bazi";
         }
@@ -99,7 +146,7 @@ class Predmet extends Database {
 
         $predmet = json_decode($podaci_korisnika, false);
         $this->naziv = $predmet->naziv;
-        $this->razred = $predmet->razred;
+        $razredi = $predmet->razred;
 
 
 
@@ -112,20 +159,37 @@ class Predmet extends Database {
 
         if(!$rezultat_upita){
 
+            $this->connection->begin_transaction();
     
-            $upit = $this->prepare_query("INSERT INTO predmet(naziv, razred)
-                    VALUES(?, ?)");
+            $upit = $this->prepare_query("INSERT INTO predmet(naziv)
+                    VALUES(?)");
     
-            $upit->bind_param("ss", $this->naziv, $this->razred);
+            $upit->bind_param("s", $this->naziv);
 
             $upit->execute();
 
+
+            $upit = $this->prepare_query("INSERT INTO razred_ima_predmet(sifra_predmeta, razred)
+                VALUES(LAST_INSERT_ID(), ?)");
+
+            $upit->bind_param("s", $razred);
+
+            foreach($razredi as $razred){
+                if(!$upit->execute()){
+                    $this->connection->rollback();
+                }
+
+            }
+
+            $this->connection->commit();
+
             $poruka = "Uspesno dodat predmet";
+            
         } else {
             $poruka = "Vec postoji odeljenje";
         }
             
-        
+    
 
         return $poruka;
 
@@ -155,18 +219,50 @@ class Predmet extends Database {
         $this->sifra_predmeta = $predmet->sifra;
 
 
-        $upit = "SELECT * FROM predmet WHERE 
-                sifra_predmeta = '{$this->sifra_predmeta}'";
-        
-        $rezultat_upita = mysqli_query($this->connection, $upit);
-        $redovi = mysqli_num_rows($rezultat_upita);
 
-        for($i = 0; $i < $redovi; $i++){
-            $podaci = mysqli_fetch_assoc($rezultat_upita);
+        $upit = $this->set_query("SELECT * FROM predmet
+                WHERE sifra_predmeta = '{$this->sifra_predmeta}'");
+        
+        while($red = $upit->fetch_assoc()){
+            $podaci = $red;
         }
 
         return $podaci;
+    }
 
+    public function sa_sifrom_razredima($podaci_korisnika){
+
+        $predmet = json_decode($podaci_korisnika, false);
+        $podaci = [];
+        $rezultat = [];
+       
+        
+        $this->sifra_predmeta = $predmet->sifra;
+
+        $upit = $this->set_query("SELECT * FROM predmet
+                WHERE sifra_predmeta = '{$this->sifra_predmeta}'");
+        
+        while($red = $upit->fetch_assoc()){
+            $podaci = $red;
+        }
+
+       array_push($rezultat, $podaci);
+
+
+        $upit = $this->set_query("SELECT * FROM razred_ima_predmet
+                WHERE sifra_predmeta = '{$this->sifra_predmeta}'");
+
+        while($red = $upit->fetch_assoc()){
+            $sifre[] = $red;
+        }
+
+
+        array_push($rezultat, $sifre);
+
+
+        
+
+        return $rezultat;
     }
 
 }

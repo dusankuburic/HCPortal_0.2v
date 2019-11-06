@@ -12,7 +12,8 @@ razred INT NOT NULL,
 PRIMARY KEY(sifra_predmeta)
 );
 
-
+/* da lida napravim tabelu razred......
+*/
 
 CREATE Table moderator(
 sifra_moderatora INTEGER NOT NULL AUTO_INCREMENT,
@@ -75,6 +76,13 @@ CREATE TABLE ucenik_uci_predmet (
     sifra_ucenika INTEGER,
     sifra_predmeta INTEGER,
     FOREIGN KEY(sifra_ucenika) REFERENCES ucenik(sifra_ucenika),
+    FOREIGN KEY(sifra_predmeta) REFERENCES predmet(sifra_predmeta)
+);
+
+
+CREATE TABLE razred_ima_predmet(
+    sifra_predmeta INTEGER,
+    razred INTEGER,
     FOREIGN KEY(sifra_predmeta) REFERENCES predmet(sifra_predmeta)
 );
 
