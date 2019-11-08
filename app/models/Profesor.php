@@ -74,6 +74,8 @@ class Profesor extends Database {
     }
 
 
+
+
     public function dodaj_profesora($podaci_korisnika){
 
         $rezultat_upita = [];
@@ -249,6 +251,45 @@ class Profesor extends Database {
 
     }
 
+    public function dodeli_predmete($podaci_korisnika){
+
+        $poruka = "prazna";
+        $predmeti_profesora = json_decode($podaci_korisnika, false);
+
+        $this->sifra_profesora = $predmeti_profesora->sifra_profesora;
+        $predmeti = $predmeti_profesora->predmeti;
+        $odeljenja = $predmeti_profesora->odeljenja;
+        // n^2 ??????
+        foreach($predmeti as $predmet){
+
+            foreach($odeljenja as $odeljenje){
+                
+
+                $upit = $this->prepare_query("INSERT INTO profesor_predaje_predmet_odeljenju(
+                    sifra_profesora,
+                    sifra_predmeta,
+                    sifra_odeljenja)
+                    VALUES(?, ?, ?)");
+                
+                $upit->bind_param("sss",
+                        $this->sifra_profesora,
+                        $predmet,
+                        $odeljenje);
+                
+                if($upit->execute()){
+                    $poruka = "uspelo";
+                } else {
+                    $poruka = "greska";
+                }
+            }
+        }
+
+        return $poruka;
+
+    
+    }
+
+
 
 
     public function upisi_ocenu($podaci_korisnika){
@@ -270,7 +311,7 @@ class Profesor extends Database {
                 ocena, 
                 polugodiste, 
                 opis)
-                VALUE(?, ?, ?, ?, ?)");
+                VALUES(?, ?, ?, ?, ?)");
 
         $upit->bind_param("sssss",
                 $sifra_ucenika,

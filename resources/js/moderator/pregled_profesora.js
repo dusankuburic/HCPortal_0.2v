@@ -21,6 +21,7 @@ function svi_profesori(){
                 row += "<td>" + myObj[i]['jmbg'] + "</td>";
                 row += "<td>" + myObj[i]['korisnicko_ime'] + "</td>";
                 row += "<td><input type='submit' value='Izmeni' class='btn btn-primary' onclick='ucitaj_profesora("+ myObj[i]['sifra_profesora']  +")'></td>";
+                row += "<td><a class='btn btn-success' href='../layouts/moderator.php?route=dodeli_predmete&sifra="+ myObj[i]['sifra_profesora'] +"'>Dodeli predmet</a></td>";
                 row += "</tr>";
 
             }

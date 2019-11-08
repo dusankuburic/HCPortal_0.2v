@@ -18,7 +18,7 @@
                         <th>Mesto stanovanja</th>
                         <th>Jmbg</th>
                         <th>Korisnicko ime</th>
-                        <th>Opcije</th>
+                        <th colspan='2'>Opcije</th>
                       </tr>
                     </thead>
                     <tbody id="profesori">

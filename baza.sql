@@ -12,7 +12,9 @@ razred INT NOT NULL,
 PRIMARY KEY(sifra_predmeta)
 );
 
-/* da lida napravim tabelu razred......
+/* da li da napravim tabelu razred......
+
+
 */
 
 CREATE Table moderator(
@@ -60,6 +62,8 @@ FOREIGN KEY(sifra_odeljenja) REFERENCES odeljenje(sifra_odeljenja)
 
 
 /* ######################################################################### */
+
+/*zavrseno*/
 CREATE TABLE ucenik_ima_ocenu (
     sifra_ucenika INTEGER,
     sifra_predmeta INTEGER,
@@ -72,6 +76,7 @@ CREATE TABLE ucenik_ima_ocenu (
 );
 
 
+/* obrisi kasnije, vrv je nepotrebno*/
 CREATE TABLE ucenik_uci_predmet (
     sifra_ucenika INTEGER,
     sifra_predmeta INTEGER,
@@ -80,6 +85,7 @@ CREATE TABLE ucenik_uci_predmet (
 );
 
 
+/* zavrseno*/
 CREATE TABLE razred_ima_predmet(
     sifra_predmeta INTEGER,
     razred INTEGER,
@@ -87,6 +93,7 @@ CREATE TABLE razred_ima_predmet(
 );
 
 
+/* zavrsi*/
 CREATE TABLE odeljenje_ima_razrednog (
     sifra_odeljenja INTEGER NULL,
     sifra_profesora INTEGER NULL,
@@ -94,6 +101,8 @@ CREATE TABLE odeljenje_ima_razrednog (
     FOREIGN KEY(sifra_profesora) REFERENCES profesor(sifra_profesora)
 );
 
+
+/* zavrsi */
 CREATE TABLE prisustvo_ucenika(
     sifra_ucenika INTEGER NOT NULL AUTO_INCREMENT,
     broj_opravdanih INTEGER NULL,
@@ -104,6 +113,7 @@ CREATE TABLE prisustvo_ucenika(
 
 );
 
+/* zavrsi */
 CREATE TABLE profesor_predaje_predmet_odeljenju(
     sifra_profesora INTEGER,
     sifra_predmeta INTEGER,

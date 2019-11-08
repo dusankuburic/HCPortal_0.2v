@@ -30,7 +30,7 @@
           <h1 class='text-center' id="naziv_predmeta"></h1>
           <hr>
         <div class="row justify-content-center">
-          <div class="col-lg-6">
+          <div class="col-lg-6 forma1">
             <table class="table table-striped">
               <thead>
                 <tr>
@@ -47,7 +47,7 @@
               </tbody>
             </table>
           </div>
-          <div class="col-lg-6">
+          <div class="col-lg-6 forma1">
             <table class="table table-striped">
               <thead>
                 <tr>
@@ -73,7 +73,7 @@
           <div class="col-lg-4 forma">
                 <h3 class='text-center'>Odabir ocene</h3>
                 <br>
-                <form method="POST" onsubmit="upisi_ocenu()">
+                <form method="POST" onsubmit="return upisi_ocenu()">
 
                   <div class="form-group">
                   <h4>Opis</h4>
