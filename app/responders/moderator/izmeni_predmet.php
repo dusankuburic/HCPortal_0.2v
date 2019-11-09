@@ -11,7 +11,7 @@ if(isset($_POST['predmet'])){
 
 
     echo $rezultat;
-    
+    exit;
 } 
 
 

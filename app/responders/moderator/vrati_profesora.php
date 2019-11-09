@@ -11,6 +11,7 @@ if(isset($_POST['profa'])){
     if($profesor_sa_sifrom){
         echo json_encode($profesor_sa_sifrom);
     }
+    exit;
 }
 
 ?>

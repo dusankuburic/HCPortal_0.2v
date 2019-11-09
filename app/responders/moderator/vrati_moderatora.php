@@ -11,6 +11,7 @@ if(isset($_POST['moderat'])){
     if($moderator_sa_sifrom){
         echo json_encode($moderator_sa_sifrom);
     }
+    exit;
 }
 
 ?>

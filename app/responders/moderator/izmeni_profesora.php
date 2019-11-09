@@ -10,6 +10,7 @@ if(isset($_POST['profa'])){
     $rezultat = $profesor->izmeni_profesora($_POST['profa']);
 
     echo $rezultat; 
+    exit;
 } 
 
 

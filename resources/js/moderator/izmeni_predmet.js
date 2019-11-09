@@ -82,6 +82,8 @@ function izmeni_predmet(){
             alert('Morate odabrati bar jedan razred');
         }
     }
+
+    return false;
                 
 }
 

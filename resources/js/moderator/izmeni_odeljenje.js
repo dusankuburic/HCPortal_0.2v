@@ -56,6 +56,8 @@ function izmeni_odeljenje(){
     xmlhttp.open("POST","../../../app/responders/moderator/izmeni_odeljenje.php", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send("odeljenje="+odeljenje_json);
+
+    return false;
     
 }
 

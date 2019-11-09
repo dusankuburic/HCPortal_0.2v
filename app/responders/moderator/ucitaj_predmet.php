@@ -21,7 +21,7 @@ echo "../layouts/moderator.php?route=izmeni_predmet&sifra=".$predmet_sa_sifrom['
 
 
 }
-
+exit;
 }
     
 

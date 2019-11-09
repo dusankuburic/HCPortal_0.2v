@@ -12,6 +12,8 @@
     <link href="../includes/css/stil.css" rel="stylesheet">
     <link href="../includes/css/all.css" rel="stylesheet">
     <link href="../includes/css/login.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   
     <title>Hello, world!</title>
   </head>

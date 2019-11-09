@@ -16,7 +16,7 @@ if(isset($_POST['ucen'])){
        echo "radi";
     }
     
-
+    exit;
 }
 
 

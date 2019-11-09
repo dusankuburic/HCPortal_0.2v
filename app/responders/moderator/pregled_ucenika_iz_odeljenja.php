@@ -10,6 +10,7 @@ if(isset($_POST['odeljenje'])){
     $rezultat = $ucenik->sa_sifrom_odeljenja($_POST['odeljenje']);
 
     echo json_encode($rezultat); 
+    exit;
 } 
 
 

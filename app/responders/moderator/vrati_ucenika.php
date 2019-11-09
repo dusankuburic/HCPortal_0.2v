@@ -11,6 +11,7 @@ if(isset($_POST['ucen'])){
     if($ucenik_sa_sifrom){
         echo json_encode($ucenik_sa_sifrom);
     }
+    exit;
 }
 
 ?>

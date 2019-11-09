@@ -21,7 +21,7 @@ echo "../layouts/moderator.php?route=izmeni_odeljenje&sifra=".$odeljenje_sa_sifr
 //echo json_encode($odeljenje_sa_sifrom);
 
 }
-
+exit;
 }
     
 

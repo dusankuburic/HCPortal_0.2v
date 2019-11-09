@@ -7,5 +7,5 @@ $ucenik = new Ucenik();
 $svi_ucenici = $ucenik->svi_ucenici();
 echo json_encode($svi_ucenici);
     
-
+exit;
 ?>

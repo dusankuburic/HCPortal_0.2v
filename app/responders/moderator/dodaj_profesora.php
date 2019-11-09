@@ -16,7 +16,7 @@ if(isset($_POST['prof'])){
        echo "radi";
     }
     
-
+    exit;
 }
 
 

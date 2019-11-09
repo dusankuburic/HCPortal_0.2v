@@ -20,7 +20,7 @@ $_SESSION['sifra_odeljenja'] = $odeljenje_sa_sifrom['sifra_odeljenja'];
 echo "../layouts/moderator.php?route=pregled_ucenika_za_upis_ocena&sifra=".$odeljenje_sa_sifrom['sifra_odeljenja'];
 
 }
-
+exit;
 }
     
 

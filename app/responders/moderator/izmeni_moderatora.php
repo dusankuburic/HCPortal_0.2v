@@ -11,7 +11,7 @@ if(isset($_POST['moderat'])){
 
 
     echo $rezultat;
-    
+    exit;
 } 
 
 

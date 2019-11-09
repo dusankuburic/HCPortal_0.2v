@@ -14,7 +14,7 @@ if($odeljenje_sa_sifrom){
 } 
 
 
-
+exit;
 }
     
 

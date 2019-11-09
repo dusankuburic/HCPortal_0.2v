@@ -254,39 +254,120 @@ class Profesor extends Database {
     public function dodeli_predmete($podaci_korisnika){
 
         $poruka = "prazna";
+        $rezultat_upita = [];
         $predmeti_profesora = json_decode($podaci_korisnika, false);
 
         $this->sifra_profesora = $predmeti_profesora->sifra_profesora;
         $predmeti = $predmeti_profesora->predmeti;
         $odeljenja = $predmeti_profesora->odeljenja;
-        // n^2 ??????
-        foreach($predmeti as $predmet){
 
-            foreach($odeljenja as $odeljenje){
-                
 
-                $upit = $this->prepare_query("INSERT INTO profesor_predaje_predmet_odeljenju(
-                    sifra_profesora,
-                    sifra_predmeta,
-                    sifra_odeljenja)
-                    VALUES(?, ?, ?)");
+        $upit = $this->set_query("SELECT sifra_predmeta FROM profesor_predaje_predmet_odeljenju
+        WHERE sifra_profesora = '{$this->sifra_profesora}'");
+
+        while($red = $upit->fetch_assoc()){
+            $rezultat_upita = $red;
+        }
+
+        if($rezultat_upita){
+            $this->connection->begin_transaction();
+
+            $upit = $this->prepare_query("DELETE FROM profesor_predaje_predmet_odeljenju
+            WHERE sifra_profesora = (?)");
+
+            $upit->bind_param("s", $this->sifra_profesora);
+
+            $upit->execute();
+
+            foreach($predmeti as $predmet){
+                foreach($odeljenja as $odeljenje){
+                    
+                    $upit = $this->prepare_query("INSERT INTO profesor_predaje_predmet_odeljenju(
+                        sifra_profesora,
+                        sifra_predmeta,
+                        sifra_odeljenja)
+                        VALUES(?, ?, ?)");
+                    
+                    $upit->bind_param("sss",
+                            $this->sifra_profesora,
+                            $predmet,
+                            $odeljenje);
+                    
+                    if(!$upit->execute()){
+                        $poruka = "greska";
+                        $this->connection->rollback();
+                    } 
+                }
+            }
                 
-                $upit->bind_param("sss",
-                        $this->sifra_profesora,
-                        $predmet,
-                        $odeljenje);
-                
-                if($upit->execute()){
-                    $poruka = "uspelo";
-                } else {
-                    $poruka = "greska";
+            $this->connection->commit();
+
+            $poruka = "Uspesno dodeljeni predmeti";
+        } else {
+
+
+            foreach($predmeti as $predmet){
+                foreach($odeljenja as $odeljenje){
+                    
+                    $upit = $this->prepare_query("INSERT INTO profesor_predaje_predmet_odeljenju(
+                        sifra_profesora,
+                        sifra_predmeta,
+                        sifra_odeljenja)
+                        VALUES(?, ?, ?)");
+                    
+                    $upit->bind_param("sss",
+                            $this->sifra_profesora,
+                            $predmet,
+                            $odeljenje);
+                    
+                    if(!$upit->execute()){
+                        $poruka = "greska";
+                    }
                 }
             }
         }
 
         return $poruka;
+    }
 
-    
+    public function predmeti_koje_predaje_odeljenjima($podaci_korisnika){
+
+        $rezultat_upita = [];
+        $predmeti = [];
+        $odeljenja = [];
+        $poruka = "Greska";
+
+        $profesor = json_decode($podaci_korisnika);
+        $this->sifra_profesora = $profesor->sifra;
+
+
+        $upit = $this->set_query("SELECT DISTINCT sifra_predmeta
+                FROM profesor_predaje_predmet_odeljenju
+                WHERE sifra_profesora = '{$this->sifra_profesora}'");
+
+        while($red = $upit->fetch_assoc()){
+            $predmeti[] = $red;
+        }
+
+        
+        $upit = $this->set_query("SELECT DISTINCT sifra_odeljenja
+                FROM profesor_predaje_predmet_odeljenju
+                WHERE sifra_profesora = '{$this->sifra_profesora}'");
+
+        while($red = $upit->fetch_assoc()){
+            $odeljenja[] = $red;
+        }
+
+
+        $rezultat_upita['predmeti'] = $predmeti;
+        $rezultat_upita['odeljenja'] = $odeljenja;
+
+        if(!$rezultat_upita){
+           return $poruka;
+        }
+
+        return $rezultat_upita;
+
     }
 
 

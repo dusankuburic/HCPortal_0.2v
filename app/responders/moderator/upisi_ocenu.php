@@ -10,6 +10,7 @@ if(isset($_POST['za_upis'])){
     $rezultat = $profesor->upisi_ocenu($_POST['za_upis']);
 
     echo $rezultat; 
+    exit;
 } 
 
 

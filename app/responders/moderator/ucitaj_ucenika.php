@@ -18,6 +18,7 @@ if(isset($_POST['ucen'])){
     
     echo "../layouts/moderator.php?route=izmeni_ucenika&sifra=".$ucenik_sa_sifrom['sifra_ucenika'];
     }
+    exit;
 }
 
 ?>

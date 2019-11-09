@@ -13,7 +13,7 @@ if(isset($_POST['moder'])){
     } else {
        echo "radi";
     }
-    
+    exit;
 }
 
 ?>

@@ -11,7 +11,7 @@ if(isset($_POST['odeljenje'])){
 
 
     echo $rezultat;
-    
+    exit;
 } 
 
 

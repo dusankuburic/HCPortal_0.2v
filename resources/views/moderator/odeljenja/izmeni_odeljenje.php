@@ -8,7 +8,7 @@
         <br>
             <div class="row justify-content-center">
                 <div class="col-lg-7 forma">
-                    <form method="post" onsubmit="izmeni_odeljenje()">
+                    <form method="post" onsubmit="return izmeni_odeljenje()">
                         <div class="form-group">
                             <h4>Naziv odeljenja</h4>
                             <input type="hidden" value="" id="sifra">

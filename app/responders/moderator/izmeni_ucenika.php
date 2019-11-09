@@ -10,6 +10,7 @@ if(isset($_POST['ucen'])){
     $rezultat = $ucenik->izmeni_ucenika($_POST['ucen']);
 
     echo $rezultat; 
+    exit;
 } 
 
 

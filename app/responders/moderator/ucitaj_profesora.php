@@ -18,6 +18,7 @@ if(isset($_POST['profa'])){
     
     echo "../layouts/moderator.php?route=izmeni_profesora&sifra=".$profesor_sa_sifrom['sifra_profesora'];
     }
+    exit;
 }
 
 ?>

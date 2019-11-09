@@ -20,7 +20,7 @@ $_SESSION['sifra_moderatora'] = $moderator_sa_sifrom['sifra_moderatora'];
 echo "../layouts/moderator.php?route=izmeni_moderatora&sifra=".$moderator_sa_sifrom['sifra_moderatora'];
 
 }
-
+exit;
 }
     
 

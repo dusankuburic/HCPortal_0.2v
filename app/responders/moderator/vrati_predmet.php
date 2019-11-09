@@ -14,7 +14,7 @@ if($predmet_sa_sifrom){
 } 
 
 
-
+exit;
 }
     
 

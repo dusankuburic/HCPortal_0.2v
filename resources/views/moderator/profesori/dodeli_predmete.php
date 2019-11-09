@@ -46,7 +46,7 @@
             </div> <!-- container-fluid end -->
             <br>
             <div class="text-center">
-            <input type="submit" class="btn btn-primary " value="Dodeli">
+            <input type="submit" class="btn btn-primary btn-lg" value="Dodeli">
             </div>
         </form>
     </div>

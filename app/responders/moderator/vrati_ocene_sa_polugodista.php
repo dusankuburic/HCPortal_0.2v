@@ -10,6 +10,7 @@ if(isset($_POST['polugodiste'])){
     $rezultat = $ucenik->ocene_sa_polugodista($_POST['polugodiste']);
 
     echo json_encode($rezultat); 
+    exit;
 } 
 
 
