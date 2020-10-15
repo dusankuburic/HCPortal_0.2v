@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
     <link href="../includes/css/sidebar.css" rel="stylesheet">
     <link href="../includes/css/stil.css" rel="stylesheet">
-    <link href="../includes/css/all.css" rel="stylesheet">
+    <link href="../includes/css/all.min.css" rel="stylesheet">
     <link href="../includes/css/login.css" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
