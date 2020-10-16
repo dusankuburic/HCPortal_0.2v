@@ -1,7 +1,6 @@
 <?php
 require_once("interfaces/IUcenik.php");
 require_once("../../models/Ucenik.php");
-require_once("../../models/Database.php");
 
 class UcenikRepository implements IUcenik {
 

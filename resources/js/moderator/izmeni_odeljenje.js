@@ -90,6 +90,7 @@ function ucitaj_odeljenje(){
     xmlhttp.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
 
+            console.log(this.responseText);
             var myObj  = JSON.parse(this.responseText);
             document.getElementById("naziv").value = myObj['naziv'];
             document.getElementById("sifra").value = myObj['sifra_odeljenja'];

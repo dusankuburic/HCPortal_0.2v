@@ -28,18 +28,21 @@ class Database implements IConnection {
 
 
     public function __construct() {
+        
         $this->set_parameters(DB_HOST, DB_USER, DB_PASS, DB_NAME);
         $this->connect_to_db();
         $this->test_connection();
     }
 
     function __desturct(){
+
         if($connection){
             mysqli_colse($connection);
         }
     }
 
     public function connect_to_db(){
+
         $this->connection = new mysqli($this->db_host, $this->db_user, $this->db_password, $this->db_name);
     }
 
@@ -59,6 +62,7 @@ class Database implements IConnection {
     }
 
     public function get_connection(){
+
         if(!isset($this->connection)){
             echo "EMPTY CONNECTION";
         } 
@@ -66,11 +70,12 @@ class Database implements IConnection {
     }
 
     public function prepare_query($query){
+
         return $this->get_connection()->prepare($query);
     }
 
     public function set_query($query){
-    
+
         return $this->get_connection()->query($query);
     }
  }
