@@ -5,8 +5,9 @@ function svi_ucenici(){
     xmlhttp.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
 
-            var myObj = JSON.parse(this.responseText);
-            
+
+           console.log(this.responseText);
+           var myObj = JSON.parse(this.responseText);
             
             if(myObj.length !== 0){
                 var row = "";
