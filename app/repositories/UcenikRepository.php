@@ -1,5 +1,6 @@
 <?php
 require_once("interfaces/IUcenik.php");
+require_once("../../models/Ucenik.php");
 require_once("../../models/Database.php");
 
 class UcenikRepository implements IUcenik{
@@ -16,16 +17,26 @@ class UcenikRepository implements IUcenik{
     }
 
 
-
-
     public function svi_ucenici(){
         
-        $rezultat_upita = [];
-
+        $rezultat_upita  = [];
+       
         $upit = $this->ctx->set_query("SELECT * FROM ucenik");
         
         while($red = $upit->fetch_assoc()){
-            $rezultat_upita[] = $red;
+            $ucenik = new Ucenik();
+
+            $ucenik->sifra_ucenika = $red["sifra_ucenika"];
+            $ucenik->ime = $red["ime"];
+            $ucenik->prezime = $red["prezime"];
+            $ucenik->korisnicko_ime = $red["korisnicko_ime"];
+            $ucenik->jmbg = $red["jmbg"];
+            $ucenik->ime_staratelja = $red["ime_staratelja"];
+            $ucenik->mesto_stanovanja = $red["mesto_stanovanja"];
+            $ucenik->prezime_staratelja = $red["prezime_staratelja"];
+            $ucenik->kontakt_telefon = $red["kontakt_telefon"];
+
+            $rezultat_upita[] = $ucenik;
         }
 
         return $rezultat_upita;
@@ -217,7 +228,7 @@ class UcenikRepository implements IUcenik{
                 FROM ucenik WHERE 
                 sifra_ucenika = '{$this->sifra_ucenika}'";
         
-        $rezultat_upita = mysqli_query($this->ctx->connection, $upit);
+        $rezultat_upita = mysqli_query($this->ctx->get_connection(), $upit);
         $redovi = mysqli_num_rows($rezultat_upita);
 
         for($i = 0; $i < $redovi; $i++){
@@ -226,4 +237,6 @@ class UcenikRepository implements IUcenik{
 
         return $podaci;
     }
+
+
 }
