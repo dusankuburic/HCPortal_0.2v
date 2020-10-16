@@ -46,25 +46,26 @@ class UcenikRepository implements IUcenik{
 
         $rezultat_upita = [];
         $ucenik_postoji = true;
+        $ucenik = new Ucenik();
 
-        $ucenik = json_decode($podaci_korisnika, false);
+        $request = json_decode($podaci_korisnika, false);
 
-        $this->ime = $ucenik->ime;
-        $this->prezime = $ucenik->prezime;
-        $this->mesto_stanovanja = $ucenik->mesto_stanovanja;
-        $this->jmbg = $ucenik->jmbg;
-        $this->ime_staratelja = $ucenik->ime_staratelja;
-        $this->prezime_staratelja = $ucenik->prezime_staratelja;
-        $this->kontakt_telefon = $ucenik->kontakt_telefon;
-        $this->sifra_odeljenja = $ucenik->sifra_odeljenja;
-        $this->korisnicko_ime = $ucenik->korisnicko_ime;
-        $this->sifra = password_hash($ucenik->sifra, PASSWORD_DEFAULT);
+        $ucenik->ime = $request->ime;
+        $ucenik->prezime = $request->prezime;
+        $ucenik->mesto_stanovanja = $request->mesto_stanovanja;
+        $ucenik->jmbg = $request->jmbg;
+        $ucenik->ime_staratelja = $request->ime_staratelja;
+        $ucenik->prezime_staratelja = $request->prezime_staratelja;
+        $ucenik->kontakt_telefon = $request->kontakt_telefon;
+        $ucenik->sifra_odeljenja = $request->sifra_odeljenja;
+        $ucenik->korisnicko_ime = $request->korisnicko_ime;
+        $ucenik->sifra = password_hash($request->sifra, PASSWORD_DEFAULT);
         //DATUM RODJENJA
         //POL
 
 
         $upit = $this->ctx->set_query("SELECT * FROM ucenik
-                WHERE korisnicko_ime = '{$this->korisnicko_ime}'");
+                WHERE korisnicko_ime = '{$ucenik->korisnicko_ime}'");
 
         while($red = $upit->fetch_assoc()){
             $rezultat_upita = $red;
@@ -87,16 +88,16 @@ class UcenikRepository implements IUcenik{
                 VALUE(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
             $upit->bind_param("ssssssssss",
-                $this->ime,
-                $this->prezime,
-                $this->korisnicko_ime,
-                $this->sifra,
-                $this->mesto_stanovanja,
-                $this->jmbg,
-                $this->ime_staratelja,
-                $this->prezime_staratelja,
-                $this->kontakt_telefon,
-                $this->sifra_odeljenja);
+                $ucenik->ime,
+                $ucenik->prezime,
+                $ucenik->korisnicko_ime,
+                $ucenik->sifra,
+                $ucenik->mesto_stanovanja,
+                $ucenik->jmbg,
+                $ucenik->ime_staratelja,
+                $ucenik->prezime_staratelja,
+                $ucenik->kontakt_telefon,
+                $ucenik->sifra_odeljenja);
 
             $upit->execute();
 
@@ -111,22 +112,23 @@ class UcenikRepository implements IUcenik{
         $rezultat_upita = [];
         $rezultat = [];
         $poruka = "prazna";
+        $ucenik = new Ucenik();
 
-        $ucenik = json_decode($podaci_korisnika, false);
+        $request = json_decode($podaci_korisnika, false);
 
-        $this->sifra_ucenika = $ucenik->sifra;
-        $this->ime = $ucenik->ime;
-        $this->prezime = $ucenik->prezime;
-        $this->mesto_stanovanja = $ucenik->mesto_stanovanja;
-        $this->korisnicko_ime = $ucenik->korisnicko_ime;
-        $this->jmbg = $ucenik->jmbg;
-        $this->ime_staratelja = $ucenik->ime_staratelja;
-        $this->prezime_staratelja = $ucenik->prezime_staratelja;
-        $this->kontakt_telefon = $ucenik->kontakt_telefon;
-        $this->sifra_odeljenja = $ucenik->sifra_odeljenja;
+        $ucenik->sifra_ucenika = $request->sifra;
+        $ucenik->ime = $request->ime;
+        $ucenik->prezime = $request->prezime;
+        $ucenik->mesto_stanovanja = $request->mesto_stanovanja;
+        $ucenik->korisnicko_ime = $request->korisnicko_ime;
+        $ucenik->jmbg = $request->jmbg;
+        $ucenik->ime_staratelja = $request->ime_staratelja;
+        $ucenik->prezime_staratelja = $request->prezime_staratelja;
+        $ucenik->kontakt_telefon = $request->kontakt_telefon;
+        $ucenik->sifra_odeljenja = $request->sifra_odeljenja;
 
         $upit = $this->ctx->set_query("SELECT * FROM ucenik
-                WHERE sifra_ucenika = '{$this->sifra_ucenika}'");
+                WHERE sifra_ucenika = '{$ucenik->sifra_ucenika}'");
         
         while($red = $upit->fetch_assoc()){
             $rezultat_upita = $red;
@@ -135,10 +137,10 @@ class UcenikRepository implements IUcenik{
 
         if($rezultat_upita){
 
-            if($this->korisnicko_ime !== $rezultat_upita['korisnicko_ime']){
+            if($ucenik->korisnicko_ime !== $rezultat_upita['korisnicko_ime']){
 
                 $upit = $this->ctx->set_query("SELECT * FROM ucenik
-                        WHERE korisnicko_ime = '{$this->korisnicko_ime}'");
+                        WHERE korisnicko_ime = '{$ucenik->korisnicko_ime}'");
 
                 while($red = $upit->fetch_assoc()){
                     $rezultat = $red;
@@ -158,18 +160,18 @@ class UcenikRepository implements IUcenik{
                             prezime_staratelja = (?),
                             kontakt_telefon = (?),
                             sifra_odeljenja = (?)
-                            WHERE sifra_ucenika = {$this->sifra_ucenika}");
+                            WHERE sifra_ucenika = {$ucenik->sifra_ucenika}");
 
                     $upit->bind_param("sssssssss",
-                            $this->ime,
-                            $this->prezime,
-                            $this->mesto_stanovanja,
-                            $this->korisnicko_ime,
-                            $this->jmbg,
-                            $this->ime_staratelja,
-                            $this->prezime_staratelja,
-                            $this->kontakt_telefon,
-                            $this->sifra_odeljenja);
+                            $ucenik->ime,
+                            $ucenik->prezime,
+                            $ucenik->mesto_stanovanja,
+                            $ucenik->korisnicko_ime,
+                            $ucenik->jmbg,
+                            $ucenik->ime_staratelja,
+                            $ucenik->prezime_staratelja,
+                            $ucenik->kontakt_telefon,
+                            $ucenik->sifra_odeljenja);
 
                     $upit->execute();
 
@@ -188,18 +190,18 @@ class UcenikRepository implements IUcenik{
                         prezime_staratelja = (?),
                         kontakt_telefon = (?),
                         sifra_odeljenja = (?)
-                        WHERE sifra_ucenika = {$this->sifra_ucenika}");
+                        WHERE sifra_ucenika = {$ucenik->sifra_ucenika}");
 
                 $upit->bind_param("sssssssss",
-                        $this->ime,
-                        $this->prezime,
-                        $this->mesto_stanovanja,
-                        $this->korisnicko_ime,
-                        $this->jmbg,
-                        $this->ime_staratelja,
-                        $this->prezime_staratelja,
-                        $this->kontakt_telefon,
-                        $this->sifra_odeljenja);
+                        $ucenik->ime,
+                        $ucenik->prezime,
+                        $ucenik->mesto_stanovanja,
+                        $ucenik->korisnicko_ime,
+                        $ucenik->jmbg,
+                        $ucenik->ime_staratelja,
+                        $ucenik->prezime_staratelja,
+                        $ucenik->kontakt_telefon,
+                        $ucenik->sifra_odeljenja);
                 
                 $upit->execute();
 
@@ -214,28 +216,26 @@ class UcenikRepository implements IUcenik{
 
     public function sa_sifrom($podaci_korisnika){
 
-        $ucenik = json_decode($podaci_korisnika, false);
-        $podaci = [];
+        $request = json_decode($podaci_korisnika, false);
        
-        
-        $this->sifra_ucenika = $ucenik->sifra;
+        $upit = $this->ctx->set_query("SELECT * FROM ucenik WHERE sifra_ucenika = '{$request->sifra}'");
+        $ucenik = new Ucenik();
 
+        while($red = $upit->fetch_assoc()){        
+              
+            $ucenik->sifra_ucenika = $red["sifra_ucenika"];
+            $ucenik->ime = $red["ime"];
+            $ucenik->prezime = $red["prezime"];
+            $ucenik->korisnicko_ime = $red["korisnicko_ime"];
+            $ucenik->jmbg = $red["jmbg"];
+            $ucenik->ime_staratelja = $red["ime_staratelja"];
+            $ucenik->mesto_stanovanja = $red["mesto_stanovanja"];
+            $ucenik->prezime_staratelja = $red["prezime_staratelja"];
+            $ucenik->kontakt_telefon = $red["kontakt_telefon"];
 
-        $upit = "SELECT sifra_ucenika, ime, prezime,
-                korisnicko_ime, jmbg, ime_staratelja,
-                prezime_staratelja, kontakt_telefon,
-                mesto_stanovanja, sifra_odeljenja 
-                FROM ucenik WHERE 
-                sifra_ucenika = '{$this->sifra_ucenika}'";
-        
-        $rezultat_upita = mysqli_query($this->ctx->get_connection(), $upit);
-        $redovi = mysqli_num_rows($rezultat_upita);
-
-        for($i = 0; $i < $redovi; $i++){
-            $podaci = mysqli_fetch_assoc($rezultat_upita);
         }
 
-        return $podaci;
+        return $ucenik;
     }
 
 
