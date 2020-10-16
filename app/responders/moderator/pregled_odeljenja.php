@@ -1,11 +1,9 @@
 <?php
-require_once("../../models/Odeljenje.php");
+require_once("../../models/Database.php");
+require_once("../../repositories/OdeljenjeRepository.php");
 header("Content-Type: application/json; charset=UTF-8");
 
-
-$odeljenje = new Odeljenje();
-$sva_odeljenja = $odeljenje->sva_odeljenja();
+$odeljenjeRepository = new OdeljenjeRepository(new Database());
+$sva_odeljenja = $odeljenjeRepository->sva_odeljenja();
 echo json_encode($sva_odeljenja);
-exit;  
-
 ?>
