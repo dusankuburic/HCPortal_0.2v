@@ -4,7 +4,7 @@ require_once("IConnection.php");
 require_once("../../config/config.php"); 
 
 
-abstract class Database implements IConnection {
+class Database implements IConnection {
     /**
      * string
     */
@@ -25,6 +25,13 @@ abstract class Database implements IConnection {
      * mixed
     */
     protected $connection;
+
+
+    public function __construct() {
+        $this->set_parameters(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+        $this->connect_to_db();
+        $this->test_connection();
+    }
 
     function __desturct(){
         if($connection){
