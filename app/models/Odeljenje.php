@@ -1,13 +1,12 @@
 <?php
+declare(strict_types=1);
+
 class Odeljenje {
 
-    public $sifra_odeljenja;
+    public string $sifra_odeljenja;
 
-    public $naziv;
+    public string $naziv;
 
-    public $razred;
+    public string $razred;
 
 }
-
-
-?>
