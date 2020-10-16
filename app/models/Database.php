@@ -26,6 +26,13 @@ class Database implements IConnection {
     */
     protected $connection;
 
+
+    public function __construct() {
+        $this->set_parameters(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+        $this->connect_to_db();
+        $this->test_connection();
+    }
+
     function __desturct(){
         if($connection){
             mysqli_colse($connection);

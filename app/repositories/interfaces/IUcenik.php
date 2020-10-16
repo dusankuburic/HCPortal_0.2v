@@ -11,4 +11,12 @@ interface IUcenik {
 
     public function sa_sifrom($podaci_korisnika);
 
+    public function ocene_sa_polugodista($podaci_korisnika);
+
+    public function sa_sifrom_odeljenja($podaci_korisnika);
+
+    public function predmeti_koje_uci($podaci_korisnika);
+
+    public function prijava($podaci_korisnika);
+
 }
