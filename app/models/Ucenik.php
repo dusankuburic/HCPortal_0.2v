@@ -81,6 +81,8 @@ class Ucenik extends Database {
     }
 
 
+    //TODO: REMOVE AFTER FULL IMPLEMENTATION OF REPOSITORY
+    //REPOSITORY_STATUS: DONE
     public function dodaj_ucenika($podaci_korisnika){
 
         $rezultat_upita = [];
@@ -146,6 +148,8 @@ class Ucenik extends Database {
     }
 
 
+     //TODO: REMOVE AFTER FULL IMPLEMENTATION OF REPOSITORY
+    //REPOSITORY_STATUS: DONE
     public function izmeni_ucenika($podaci_korisnika){
 
         $rezultat_upita = [];
@@ -253,6 +257,8 @@ class Ucenik extends Database {
     }
 
 
+    //TODO: REMOVE AFTER FULL IMPLEMENTATION OF REPOSITORY
+    //REPOSITORY_STATUS: DONE
     public function svi_ucenici(){
         
         $rezultat_upita = [];
@@ -269,7 +275,7 @@ class Ucenik extends Database {
 
     public function predmeti_koje_uci($podaci_korisnika){
 
-        /**moglo je i bolje al ajde, kasnije...nikad... */
+
         $rezultat_upita = [];
         $sifre_predmeta = [];
         $rezultat = [];
@@ -320,7 +326,8 @@ class Ucenik extends Database {
         
     }
 
-
+    //TODO: REMOVE AFTER FULL IMPLEMENTATION OF REPOSITORY
+    //REPOSITORY_STATUS: DONE
     public function sa_sifrom($podaci_korisnika){
 
         $ucenik = json_decode($podaci_korisnika, false);
