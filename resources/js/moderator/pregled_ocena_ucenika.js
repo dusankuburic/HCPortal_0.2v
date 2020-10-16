@@ -83,7 +83,6 @@ function ucitaj_prvo_polugodiste(){
             
             var row = '';
             var myObj  = JSON.parse(this.responseText);
-            console.log(myObj);
 
             if(myObj.length !== 0){
                 var row = "";
@@ -130,7 +129,6 @@ function ucitaj_drugo_polugodiste(){
         if(this.readyState == 4 && this.status == 200){
             
                 //var row = '';
-                console.log(this.responseText);
                 var myObj  = JSON.parse(this.responseText);
                 
 

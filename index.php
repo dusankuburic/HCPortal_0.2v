@@ -9,7 +9,7 @@
 
     <!-- Bootstrap CSS -->
     <link href="resources/views/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="resources/views/includes/css/all.css" rel="stylesheet">
+    <link href="resources/views/includes/css/all.min.css" rel="stylesheet">
     <title>Hello, world!</title>
   </head>
 
