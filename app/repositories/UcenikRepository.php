@@ -6,7 +6,7 @@ class UcenikRepository implements IUcenik {
 
     private $ctx;
 
-    public function __construct($ctx_){
+    public function __construct($ctx_) {
         $this->ctx = $ctx_;
     }
 

@@ -4,23 +4,23 @@ require_once("Database.php");
 
 class Profesor extends Database {
 
-    private $sifra_profesora;
+    public $sifra_profesora;
 
-    private $ime;
+    public $ime;
 
-    private $prezime;
+    public $prezime;
 
     public $korisnicko_ime;
 
-    private $sifra;
+    public $sifra;
 
-    private $datum_rodjenja;
+    public $datum_rodjenja;
 
-    private $mesto_stanovanja;
+    public $mesto_stanovanja;
 
-    private $jmbg;
+    public $jmbg;
 
-    private $pol;
+    public $pol;
 
 
 
@@ -73,56 +73,6 @@ class Profesor extends Database {
         return $stanje_prijave;
     }
 
-
-
-
-    public function dodaj_profesora($podaci_korisnika){
-
-        $rezultat_upita = [];
-        $profesor_postoji = true;
-
-        $profesor = json_decode($podaci_korisnika, false);
-
-        $this->ime = $profesor->ime;
-        $this->prezime = $profesor->prezime;
-        $this->mesto_stanovanja = $profesor->mesto_stanovanja;
-        $this->jmbg = $profesor->jmbg;
-        $this->korisnicko_ime = $profesor->korisnicko_ime;
-        $this->sifra = password_hash($profesor->sifra, PASSWORD_DEFAULT);
-
-        $upit = $this->set_query("SELECT * FROM profesor
-                WHERE korisnicko_ime = '{$this->korisnicko_ime}'");
-
-        while($red = $upit->fetch_assoc()){
-            $rezultat_upita = $red;
-        }
-
-        if(!$rezultat_upita){
-
-            $upit = $this->prepare_query("INSERT INTO profesor(
-                ime,
-                prezime,
-                mesto_stanovanja,
-                jmbg,
-                korisnicko_ime,
-                sifra)
-                VALUE(?, ?, ?, ?, ?, ?)");
-
-            $upit->bind_param("ssssss",
-                $this->ime,
-                $this->prezime,
-                $this->mesto_stanovanja,
-                $this->jmbg,
-                $this->korisnicko_ime,
-                $this->sifra);
-
-            $upit->execute();
-
-            $profesor_postoji = false;
-        }
-
-        return $profesor_postoji;
-    }
 
 
     public function izmeni_profesora($podaci_korisnika){
@@ -212,19 +162,6 @@ class Profesor extends Database {
         return $poruka;
     }
 
-
-    public function svi_profesori(){
-        
-        $rezultat_upita = [];
-
-        $upit =  $this->set_query("SELECT * FROM profesor");
-        
-        while($red = $upit->fetch_assoc()){
-            $rezultat_upita[] = $red;
-        }
-
-        return $rezultat_upita;
-    }
 
     public function sa_sifrom($podaci_korisnika){
 
