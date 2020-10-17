@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="9c2e2d14-9f07-4f98-91cd-29003bd4ebd5" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/app/models/Predmet.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Predmet.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/repositories/PredmetRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/repositories/PredmetRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/repositories/interfaces/IPredmet.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/repositories/interfaces/IPredmet.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/responders/moderator/dodaj_predmet.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/responders/moderator/dodaj_predmet.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/responders/moderator/izmeni_predmet.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/responders/moderator/izmeni_predmet.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/responders/moderator/ucitaj_predmet.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/responders/moderator/ucitaj_predmet.php" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1j1ckgtiF8i53fq64OzckZlz50G" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9c2e2d14-9f07-4f98-91cd-29003bd4ebd5" name="Default Changelist" comment="" />
+      <created>1602975184748</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1602975184748</updated>
+      <workItem from="1602975187078" duration="18000" />
+    </task>
+    <servers />
+  </component>
+</project>

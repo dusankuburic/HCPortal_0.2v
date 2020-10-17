@@ -122,7 +122,6 @@ function dodaj_ucenika(){
    xmlhttp = new XMLHttpRequest();
    ucenik_json = JSON.stringify(ucenik);
 
-   console.log(ucenik_json);
 
    xmlhttp.onreadystatechange = function(){
     if(this.readyState == 4 && this.status == 200){
