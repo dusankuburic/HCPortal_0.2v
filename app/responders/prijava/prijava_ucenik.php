@@ -4,7 +4,6 @@ require_once("../../models/Database.php");
 require_once("../../repositories/UcenikRepository.php");
 header("Content-Type: application/json; charset=UTF-8");
 
-
 if(isset($_POST['user'])){
  
     $ucenik = new UcenikRepository(new Database());
@@ -18,5 +17,4 @@ if(isset($_POST['user'])){
         echo "greska";
     }  
 }
-
 ?>

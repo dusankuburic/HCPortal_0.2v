@@ -6,7 +6,7 @@ class UcenikRepository implements IUcenik {
 
     private $ctx;
 
-    public function __construct($ctx_){
+    public function __construct($ctx_) {
         $this->ctx = $ctx_;
     }
 
@@ -359,8 +359,8 @@ class UcenikRepository implements IUcenik {
             }
         }
 
-        $result = array("stanje_prijave" => $stanje_prijave, "korisnicko_ime" => $korisnicko_ime);
+        $response = array("stanje_prijave" => $stanje_prijave, "korisnicko_ime" => $korisnicko_ime);
 
-        return $result;
+        return $response;
     }
 }
