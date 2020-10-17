@@ -94,7 +94,6 @@ function dodaj_profesora(){
    xmlhttp.onreadystatechange = function(){
     if(this.readyState == 4 && this.status == 200){
 
-        console.log(this.responseText);
          if(this.responseText === 'radi') {
              alert('uspesno dodat profesor');
              resetuj_formu();
