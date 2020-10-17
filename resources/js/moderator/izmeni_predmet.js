@@ -123,7 +123,6 @@ function ucitaj_predmet(){
     xmlhttp.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
             
-        
             var myObj  = JSON.parse(this.responseText);
             
             document.getElementById("naziv").value = myObj[0]['naziv'];

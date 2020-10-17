@@ -1,17 +1,13 @@
 <?php
-require_once("../../models/Predmet.php");
+require_once("../../models/Database.php");
+require_once("../../repositories/PredmetRepository.php");
 header("Content-Type: application/json; charset=UTF-8");
-
-
 
 if(isset($_POST['predmet'])){
 
-    $predmet = new Predmet();
-    $rezultat = $predmet->dodaj_predmet($_POST['predmet']);
+    $predmetRepository = new PredmetRepository(new Database());
+    $rezultat = $predmetRepository->dodaj_predmet($_POST['predmet']);
 
-    var_dump($rezultat);
-    
+    echo $rezultat;
 }
-
-
 ?>

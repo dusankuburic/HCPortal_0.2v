@@ -91,7 +91,6 @@ function izmeni_ucenika(){
    xmlhttp = new XMLHttpRequest();
    ucenik_json = JSON.stringify(ucenik);
 
-   console.log(ucenik_json);
 
    xmlhttp.onreadystatechange = function(){
     if(this.readyState == 4 && this.status == 200){
@@ -159,7 +158,7 @@ function ucitaj_ucenika(){
     xmlhttp.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
             
-            console.log(this.responseText);
+
             var myObj  = JSON.parse(this.responseText);
 
             document.getElementById("ime").value = myObj['ime'];
