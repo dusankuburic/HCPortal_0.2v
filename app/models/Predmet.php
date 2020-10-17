@@ -5,9 +5,9 @@ require_once("Database.php");
 
 class Predmet extends Database {
 
-    private $sifra_predmeta;
+    public $sifra_predmeta;
 
-    private $naziv;
+    public $naziv;
 
 
 
@@ -193,20 +193,6 @@ class Predmet extends Database {
 
         return $poruka;
 
-    }
-
-    public function svi_predmeti(){
-
-
-        $rezultat_upita = [];
-
-        $upit =  $this->set_query("SELECT * FROM predmet");
-        
-        while($red = $upit->fetch_assoc()){
-            $rezultat_upita[] = $red;
-        }
-
-        return $rezultat_upita;
     }
 
 
