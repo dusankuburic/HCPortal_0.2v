@@ -4,7 +4,6 @@ require_once("../../models/Database.php");
 require_once("../../repositories/UcenikRepository.php");
 header("Content-Type: application/json; charset=UTF-8");
 
-
 if(isset($_POST['ucen'])){
 
     $ucenikRepository = new UcenikRepository(new Database());
@@ -17,5 +16,4 @@ if(isset($_POST['ucen'])){
         echo "../layouts/moderator.php?route=izmeni_ucenika&sifra=".$ucenik_sa_sifrom->sifra_ucenika;
     }
 }
-
 ?>

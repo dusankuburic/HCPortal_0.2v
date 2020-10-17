@@ -1,37 +1,24 @@
 <?php
+declare(strict_types=1);
 
-require_once("Database.php");
+class Profesor {
 
-class Profesor extends Database {
+    public int $sifra_profesora;
 
-    public $sifra_profesora;
+    public string $ime;
 
-    public $ime;
+    public string $prezime;
 
-    public $prezime;
+    public string $korisnicko_ime;
 
-    public $korisnicko_ime;
+    public string $sifra;
 
-    public $sifra;
+    public string $datum_rodjenja;
 
-    public $datum_rodjenja;
+    public string $mesto_stanovanja;
 
-    public $mesto_stanovanja;
+    public string $jmbg;
 
-    public $jmbg;
-
-    public $pol;
-
-
-
-    public function __construct(){
-
-        $this->set_parameters(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-
-        $this->connect_to_db();
-
-        $this->test_connection();
-    }
-
+    public string $pol;
 
 }
