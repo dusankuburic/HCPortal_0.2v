@@ -16,19 +16,12 @@ function login_user(){
 
     xmlhttp.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
-
-            
-           
+     
             if(this.responseText === 'greska'){
                 alert('Nepostoji takav moderator u bazi');
             } else {
                 window.location.href = this.responseText;
-            }
-
-            console.log('*');
-            console.log(this.responseText);
-            console.log('*');
-    
+            }   
         }
     };
     
